@@ -14,7 +14,6 @@
 		85031ADF2C28CD3D0060DF89 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031ADE2C28CD3D0060DF89 /* ChatView.swift */; };
 		85031AE12C28CD9A0060DF89 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE02C28CD9A0060DF89 /* Conversation.swift */; };
 		85031AE32C28DB740060DF89 /* ScriptedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE22C28DB740060DF89 /* ScriptedResponse.swift */; };
-		85031AE62C292FB70060DF89 /* MessageHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE52C292FB70060DF89 /* MessageHandling.swift */; };
 		85031AE82C29320B0060DF89 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE72C29320B0060DF89 /* ChatBubble.swift */; };
 		85031AEA2C29D84E0060DF89 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE92C29D84E0060DF89 /* ChatViewModel.swift */; };
 		85031AEE2C2A31F40060DF89 /* GameChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AED2C2A31F40060DF89 /* GameChatView.swift */; };
@@ -29,7 +28,6 @@
 		85031ADE2C28CD3D0060DF89 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		85031AE02C28CD9A0060DF89 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		85031AE22C28DB740060DF89 /* ScriptedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptedResponse.swift; sourceTree = "<group>"; };
-		85031AE52C292FB70060DF89 /* MessageHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandling.swift; sourceTree = "<group>"; };
 		85031AE72C29320B0060DF89 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 		85031AE92C29D84E0060DF89 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		85031AED2C2A31F40060DF89 /* GameChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChatView.swift; sourceTree = "<group>"; };
@@ -65,16 +63,12 @@
 		85031ACF2C28CB8D0060DF89 /* TinderGameTest */ = {
 			isa = PBXGroup;
 			children = (
+				85031AD02C28CB8D0060DF89 /* TinderGameTestApp.swift */,
 				85031AD42C28CB900060DF89 /* Assets.xcassets */,
 				85031AD62C28CB900060DF89 /* Preview Content */,
 				85031AE42C29034B0060DF89 /* Model */,
-				85031AD02C28CB8D0060DF89 /* TinderGameTestApp.swift */,
-				85031AD22C28CB8D0060DF89 /* ContentView.swift */,
-				85031ADE2C28CD3D0060DF89 /* ChatView.swift */,
-				85031AED2C2A31F40060DF89 /* GameChatView.swift */,
-				85031AE92C29D84E0060DF89 /* ChatViewModel.swift */,
-				85031AE72C29320B0060DF89 /* ChatBubble.swift */,
-				85031AE52C292FB70060DF89 /* MessageHandling.swift */,
+				85031AEF2C2A36960060DF89 /* ViewModel */,
+				85031AF02C2A36B70060DF89 /* View */,
 			);
 			path = TinderGameTest;
 			sourceTree = "<group>";
@@ -94,6 +88,25 @@
 				85031AE02C28CD9A0060DF89 /* Conversation.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		85031AEF2C2A36960060DF89 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				85031AE92C29D84E0060DF89 /* ChatViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		85031AF02C2A36B70060DF89 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				85031AD22C28CB8D0060DF89 /* ContentView.swift */,
+				85031ADE2C28CD3D0060DF89 /* ChatView.swift */,
+				85031AED2C2A31F40060DF89 /* GameChatView.swift */,
+				85031AE72C29320B0060DF89 /* ChatBubble.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,7 +182,6 @@
 				85031AE12C28CD9A0060DF89 /* Conversation.swift in Sources */,
 				85031AEE2C2A31F40060DF89 /* GameChatView.swift in Sources */,
 				85031AD32C28CB8D0060DF89 /* ContentView.swift in Sources */,
-				85031AE62C292FB70060DF89 /* MessageHandling.swift in Sources */,
 				85031AE32C28DB740060DF89 /* ScriptedResponse.swift in Sources */,
 				85031ADF2C28CD3D0060DF89 /* ChatView.swift in Sources */,
 				85031AD12C28CB8D0060DF89 /* TinderGameTestApp.swift in Sources */,
