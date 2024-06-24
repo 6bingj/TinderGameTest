@@ -14,7 +14,7 @@ struct ChatView: View {
         NavigationStack {
             VStack {
                 if viewModel.gameMode {
-                    gameChatView
+                    GameChatView(viewModel: viewModel)
                         .transition(.asymmetric(
                             insertion: .move(edge: .bottom).combined(with: .opacity),
                             removal: .move(edge: .bottom).combined(with: .opacity)
@@ -80,25 +80,6 @@ struct ChatView: View {
         
     }
     
-    @ViewBuilder private var gameChatView: some View {
-        ScrollViewReader { scrollViewProxy in
-            ScrollView {
-                VStack(alignment: .leading) {
-                    ForEach(viewModel.conversationExposed.messages) { message in
-                        ChatBubble(message: message)
-                    }
-                    .padding(.horizontal)
-                }
-            }
-            .animation(.default, value: viewModel.conversationExposed.messages)
-            .onChange(of: viewModel.conversationExposed.messages) {
-                viewModel.scrollToLastMessage(with: scrollViewProxy)
-            }
-        }
-        
-        optionButtons()
-        
-    }
     
     @ViewBuilder private var regChatView: some View {
         ScrollViewReader { scrollViewProxy in
@@ -116,29 +97,6 @@ struct ChatView: View {
             }
         }
         
-    }
-    
-    @ViewBuilder private func optionButtons() -> some View {
-        if let level = levels[viewModel.currentLevel], viewModel.allowInput {
-            ForEach(level.options, id: \.self) { option in
-                Button(action: {
-                    viewModel.handleOptionSelection(option)
-                }) {
-                    Text(option)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
-                        .background(Color.white)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 40)
-                                .stroke(Color(red: 241 / 255, green: 116 / 255, blue: 189 / 255), lineWidth: 2)
-                        )
-                    if option == level.correctOption {
-                        // Additional UI elements for correct option
-                    }
-                }
-                .disabled(!viewModel.allowInput)
-            }
-        }
     }
     
     @ViewBuilder private var bottomSheet: some View {

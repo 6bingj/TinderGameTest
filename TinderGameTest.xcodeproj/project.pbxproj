@@ -17,6 +17,7 @@
 		85031AE62C292FB70060DF89 /* MessageHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE52C292FB70060DF89 /* MessageHandling.swift */; };
 		85031AE82C29320B0060DF89 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE72C29320B0060DF89 /* ChatBubble.swift */; };
 		85031AEA2C29D84E0060DF89 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE92C29D84E0060DF89 /* ChatViewModel.swift */; };
+		85031AEE2C2A31F40060DF89 /* GameChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AED2C2A31F40060DF89 /* GameChatView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		85031AE52C292FB70060DF89 /* MessageHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandling.swift; sourceTree = "<group>"; };
 		85031AE72C29320B0060DF89 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 		85031AE92C29D84E0060DF89 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		85031AED2C2A31F40060DF89 /* GameChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChatView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				85031AD02C28CB8D0060DF89 /* TinderGameTestApp.swift */,
 				85031AD22C28CB8D0060DF89 /* ContentView.swift */,
 				85031ADE2C28CD3D0060DF89 /* ChatView.swift */,
+				85031AED2C2A31F40060DF89 /* GameChatView.swift */,
 				85031AE92C29D84E0060DF89 /* ChatViewModel.swift */,
 				85031AE72C29320B0060DF89 /* ChatBubble.swift */,
 				85031AE52C292FB70060DF89 /* MessageHandling.swift */,
@@ -164,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85031AE12C28CD9A0060DF89 /* Conversation.swift in Sources */,
+				85031AEE2C2A31F40060DF89 /* GameChatView.swift in Sources */,
 				85031AD32C28CB8D0060DF89 /* ContentView.swift in Sources */,
 				85031AE62C292FB70060DF89 /* MessageHandling.swift in Sources */,
 				85031AE32C28DB740060DF89 /* ScriptedResponse.swift in Sources */,

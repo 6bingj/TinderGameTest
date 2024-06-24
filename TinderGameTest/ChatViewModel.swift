@@ -139,12 +139,18 @@ class ChatViewModel: ObservableObject {
                     }
                 }
             } else if levels[currentLevel] != nil { //User selected wrong prompt
-                
+                allowInput = false //don't allow input until follow-up messages finish
+
                 let aiMessage = Message(id: UUID().uuidString, role: .host, content: "Oops.. you two selected different option. Please discuss and come to an agreement to move on.", createdAt: Date())
                 let matchMessage = Message(id: UUID().uuidString, role: .match, content: "lol I'm not changing my option tho.", createdAt: Date())
 
                 appendWithCumulativeRandomDelay(aiMessage)
                 appendWithCumulativeRandomDelay(matchMessage)
+                
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay){
+                    self.allowInput = true
+                }
                 
             } else {
                 let errorMessage = Message(id: UUID().uuidString, role: .host, content: "I didn't understand that. Please try again.", createdAt: Date())
