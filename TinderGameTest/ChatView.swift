@@ -12,33 +12,75 @@ struct ChatView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollViewReader { scrollViewProxy in
                 VStack {
-                    ScrollView {
-                        VStack(alignment: .leading) {
-                            ForEach(viewModel.conversationExposed.messages) { message in
-                                ChatBubble(message: message)
-                            }
-                            .padding(.horizontal)
-                        }
+                    if viewModel.gameMode {
+                        gameChatView
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .bottom).combined(with: .opacity),
+                                removal: .move(edge: .bottom).combined(with: .opacity)
+                            ))
+                    } else {
+                        regChatView
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .top).combined(with: .opacity),
+                                removal: .move(edge: .top).combined(with: .opacity)
+                            ))
                     }
-                    .animation(.default, value: viewModel.conversationExposed.messages)
-                    .onChange(of: viewModel.conversationExposed.messages) {
-                        viewModel.scrollToLastMessage(with: scrollViewProxy)
-                    }
-                    
-                    optionButtons()
-                    
-                    Button {
-                        viewModel.gameMode.toggle()
-                    } label: {
-                        Text("toggle")
-                    }
-
-                    
                     inputBar($viewModel.inputText, fillColor: viewModel.fillColor, strokeColor: viewModel.strokeColor, tapSendMessage: viewModel.tapSendMessage)
                 }
+            
+        }
+    }
+    
+    @ViewBuilder private var gameChatView: some View {
+        ScrollViewReader { scrollViewProxy in
+            ScrollView {
+                VStack(alignment: .leading) {
+                    ForEach(viewModel.conversationExposed.messages) { message in
+                        ChatBubble(message: message)
+                    }
+                    .padding(.horizontal)
+                }
             }
+            .animation(.default, value: viewModel.conversationExposed.messages)
+            .onChange(of: viewModel.conversationExposed.messages) {
+                viewModel.scrollToLastMessage(with: scrollViewProxy)
+            }
+        }
+        optionButtons()
+        
+        Button {
+            withAnimation {
+                viewModel.gameMode.toggle()
+            }
+        } label: {
+            Text("toggle")
+        }
+    }
+    
+    @ViewBuilder private var regChatView: some View {
+        ScrollViewReader { scrollViewProxy in
+            ScrollView {
+                VStack(alignment: .leading) {
+                    ForEach(viewModel.conversationExposed.messages) { message in
+                        ChatBubble(message: message)
+                    }
+                    .padding(.horizontal)
+                }
+            }
+            .animation(.default, value: viewModel.conversationExposed.messages)
+            .onChange(of: viewModel.conversationExposed.messages) {
+                viewModel.scrollToLastMessage(with: scrollViewProxy)
+            }
+        }
+        
+        Button {
+            withAnimation {
+                viewModel.gameMode.toggle()
+            }
+        } label: {
+            Text("toggle")
+                .foregroundStyle(.cyan)
         }
     }
 
@@ -70,16 +112,6 @@ struct ChatView: View {
 
 
 struct GameView_Previews: PreviewProvider {
-//    @State static var previewConversation = Conversation(
-//        id: "1",
-//        messages: [
-//            Message(id: "1", role: .user, content: "Hello", createdAt: Date(timeIntervalSinceReferenceDate: 0)),
-//            Message(id: "2", role: .user, content: "I need help.", createdAt: Date(timeIntervalSinceReferenceDate: 100)),
-//            Message(id: "3", role: .match, content: "Aw what's the matter?", createdAt: Date(timeIntervalSinceReferenceDate: 200)),
-//            Message(id: "4", role: .host, content: "I didn't understand that. Please try again.", createdAt: Date(timeIntervalSinceReferenceDate: 300)),
-//            Message(id: "5", role: .userPrompt, content: "Open the right door", createdAt: Date(timeIntervalSinceReferenceDate: 400))
-//        ]
-//    )
 
     static var previews: some View {
         ChatView()

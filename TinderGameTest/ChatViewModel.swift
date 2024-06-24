@@ -9,8 +9,8 @@ import SwiftUI
 
 class ChatViewModel: ObservableObject {
     @Published var inputText: String = ""
-    @Published var conversationGame: Conversation = initialConversation
-    @Published var conversationReg: Conversation = initialConversation
+    @Published var conversationGame: Conversation = initialGameConversation
+    @Published var conversationReg: Conversation = initialRegConversation
     @Published var gameMode: Bool = false
     
      var conversationExposed: Conversation {
