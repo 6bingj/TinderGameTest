@@ -7,20 +7,57 @@
 
 import SwiftUI
 
-struct DetailView: View {
-    @State var inputText: String = ""
+class DetailViewModel: ObservableObject {
+    @Published var inputText: String = ""
+    @Published var conversation: Conversation = initialConversation
 
-    let conversation: Conversation
-    let error: Error?
-    let sendMessage: (String, MessageRole) -> Void
-
-    private var fillColor: Color {
+    var fillColor: Color {
         return Color(uiColor: UIColor.systemBackground)
     }
 
-    private var strokeColor: Color {
+    var strokeColor: Color {
         return Color(uiColor: UIColor.systemGray5)
     }
+
+    func handleOptionSelection(_ option: String) {
+        if let level = levels[currentLevel], option == level.correctOption {
+            sendMessage(option, .userPrompt)
+        } else {
+            sendMessage("Hmmm yeah but I think the other option is better. Please?", .match)
+        }
+    }
+
+    func tapSendMessage() {
+        let message = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+        if message.isEmpty {
+            return
+        }
+
+        let messageRole: MessageRole = levels.keys.contains(message.lowercased()) ? .userPrompt : .user
+        
+        sendMessage(message, messageRole)
+        inputText = ""
+    }
+
+    func scrollToLastMessage(with scrollViewProxy: ScrollViewProxy) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            if let lastMessage = self.conversation.messages.last {
+                withAnimation {
+                    scrollViewProxy.scrollTo(lastMessage.id, anchor: .bottom)
+                }
+            }
+        }
+    }
+
+    func sendMessage(_ message: String, _ role: MessageRole) {
+        MessageHandling.sendMessage(message, role: role, conversation: &conversation)
+    }
+}
+
+
+
+struct DetailView: View {
+    @StateObject private var viewModel = DetailViewModel()
 
     var body: some View {
         NavigationStack {
@@ -28,23 +65,19 @@ struct DetailView: View {
                 VStack {
                     ScrollView {
                         VStack(alignment: .leading) {
-                            ForEach(conversation.messages) { message in
+                            ForEach(viewModel.conversation.messages) { message in
                                 ChatBubble(message: message)
                             }
                             .padding(.horizontal)
                         }
                     }
-                    .animation(.default, value: conversation.messages)
-                    .onChange(of: conversation.messages) {
-                        scrollToLastMessage(with: scrollViewProxy)
+                    .animation(.default, value: viewModel.conversation.messages)
+                    .onChange(of: viewModel.conversation.messages) {
+                        viewModel.scrollToLastMessage(with: scrollViewProxy)
                     }
                     
-//                    if let error = error {
-//                        errorMessage(error: error)
-//                    }
-                    
                     optionButtons()
-
+                    
                     inputBar()
                 }
             }
@@ -55,38 +88,28 @@ struct DetailView: View {
         if let level = levels[currentLevel] {
             ForEach(level.options, id: \.self) { option in
                 Button(action: {
-                    handleOptionSelection(option)
+                    viewModel.handleOptionSelection(option)
                 }) {
                     Text(option)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 12)
-                        .background(Color.white) // This should match the background color of your overall view to make it transparent
+                        .background(Color.white)
                         .overlay(
                             RoundedRectangle(cornerRadius: 40)
-                                .stroke(Color(red: 241 / 255, green: 116 / 255, blue: 189 / 255), lineWidth: 2) // Border color and width
+                                .stroke(Color(red: 241 / 255, green: 116 / 255, blue: 189 / 255), lineWidth: 2)
                         )
                     if option == level.correctOption {
-//                        Text("check")
-                        //TODO: add match profile picture to show they selected this
+                        // Additional UI elements for correct option
                     }
                 }
             }
         }
     }
     
-    private func handleOptionSelection(_ option: String) {
-        if let level = levels[currentLevel], option == level.correctOption {
-            sendMessage(option, .userPrompt)
-        } else {
-            sendMessage("Hmmm yeah but I think the other option is better. Please?", .match)
-        }
-    }
-
-    
     @ViewBuilder private func inputBar() -> some View {
         HStack {
             TextEditor(
-                text: $inputText
+                text: $viewModel.inputText
             )
             .padding(.vertical, -8)
             .padding(.horizontal, -4)
@@ -98,14 +121,14 @@ struct DetailView: View {
                     cornerRadius: 16,
                     style: .continuous
                 )
-                .fill(fillColor)
+                .fill(viewModel.fillColor)
                 .overlay(
                     RoundedRectangle(
                         cornerRadius: 16,
                         style: .continuous
                     )
                     .stroke(
-                        strokeColor,
+                        viewModel.strokeColor,
                         lineWidth: 1
                     )
                 )
@@ -115,7 +138,7 @@ struct DetailView: View {
 
             Button(action: {
                 withAnimation {
-                    tapSendMessage()
+                    viewModel.tapSendMessage()
                 }
             }) {
                 Image(systemName: "arrow.up.circle.fill")
@@ -124,141 +147,28 @@ struct DetailView: View {
                     .frame(width: 24, height: 24)
                     .padding(.trailing)
             }
-            .disabled(inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            .disabled(viewModel.inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
         }
         .padding(.bottom)
     }
-    
-    private func tapSendMessage() {
-        let message = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
-        if message.isEmpty {
-            return
-        }
-
-        let messageRole: MessageRole = levels.keys.contains(message.lowercased()) ? .userPrompt : .user
-        
-        sendMessage(message, messageRole)
-        inputText = ""
-
-    }
-    
-    private func scrollToLastMessage(with scrollViewProxy: ScrollViewProxy) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if let lastMessage = conversation.messages.last {
-                withAnimation {
-                    scrollViewProxy.scrollTo(lastMessage.id, anchor: .bottom)
-                }
-            }
-        }
-    }
 }
 
 
-struct ThreeRoundedCornersShape: Shape {
-    var corners: UIRectCorner
-    var radius: CGFloat
 
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-}
 
-struct ChatBubble: View {
-    let message: Message
-
-    private var matchBackgroundColor: Color {
-        return Color(uiColor: UIColor.systemGray5)
-    }
-    
-    private var assistantBackgroundColor: Color {
-        return Color(red: 241 / 255, green: 116 / 255, blue: 189 / 255)
-    }
-
-    private var userForegroundColor: Color {
-        return Color(uiColor: .white)
-    }
-
-    private var userBackgroundColor: Color {
-        return Color(uiColor: .systemBlue)
-    }
-
-    var body: some View {
-        HStack(alignment:.bottom) {
-            switch message.role {
-            case .host:
-                Circle()
-                    .frame(width: 40)
-                Text(message.content)
-                    .foregroundColor(userForegroundColor)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                    .background(assistantBackgroundColor)
-                    .clipShape(
-                        ThreeRoundedCornersShape(corners: [.topLeft, .topRight, .bottomRight], radius: 16)
-
-                    )
-                Spacer(minLength: 24)
-            case .user:
-                Spacer(minLength: 24)
-                Text(message.content)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                    .foregroundColor(userForegroundColor)
-                    .background(userBackgroundColor)
-                    .clipShape(
-                        ThreeRoundedCornersShape(corners: [.topLeft, .topRight, .bottomLeft], radius: 16)
-                    )
-            case .match:
-                Circle()
-                    .frame(width: 40)
-                    .foregroundStyle(.yellow)
-              Text(message.content)
-                  .padding(.horizontal, 16)
-                  .padding(.vertical, 12)
-                  .background(matchBackgroundColor)
-                  .clipShape(
-                    ThreeRoundedCornersShape(corners: [.topLeft, .topRight, .bottomRight], radius: 16)
-                  )
-              Spacer(minLength: 24)
-                
-                
-            case .userPrompt:
-                Spacer(minLength: 24)
-                Text(message.content)
-                    .foregroundColor(.black)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-//                    .background(Color.clear) // This should match the background color of your overall view to make it transparent
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 40)
-//                            .stroke(Color(red: 241 / 255, green: 116 / 255, blue: 189 / 255), lineWidth: 2) // Border color and width
-//                    )
-                Spacer(minLength: 24)
-
-    
-            }
-        }
-    }
-}
-
-#Preview {
-    DetailView(
-        conversation: Conversation(
-            id: "1",
-            messages: [
-                Message(id: "1", role: .user, content: "Hello?", createdAt: Date(timeIntervalSinceReferenceDate: 0)),
-                Message(id: "2", role: .user, content: "I need help.", createdAt: Date(timeIntervalSinceReferenceDate: 100)),
-                Message(id: "3", role: .match, content: "Aw what's the matter?", createdAt: Date(timeIntervalSinceReferenceDate: 200)),
-                Message(id: "4", role: .host, content:
-                          """
-                          Magna nulla tempor in. Proident laboris et laborum. Occaecat aute adipisicing duis excepteur non non elit Lorem voluptate irure. Do Lorem nostrud aute aute aliquip enim. Ad exercitation ut enim adipisicing irure amet aute laboris magna culpa labore aliqua. Fugiat et aute cupidatat eu ea qui sunt labore. Lorem culpa elit cillum labore duis ea ad ex duis aliqua ex veniam.
-                          """, createdAt: Date(timeIntervalSinceReferenceDate: 200)),
-                Message(id: "5", role: .userPrompt, content: "Open the right door", createdAt: Date(timeIntervalSinceReferenceDate: 200))
-
-            ]
-        ),
-        error: nil,
-        sendMessage: { _,_  in }
+struct DetailView_Previews: PreviewProvider {
+    @State static var previewConversation = Conversation(
+        id: "1",
+        messages: [
+            Message(id: "1", role: .user, content: "Hello", createdAt: Date(timeIntervalSinceReferenceDate: 0)),
+            Message(id: "2", role: .user, content: "I need help.", createdAt: Date(timeIntervalSinceReferenceDate: 100)),
+            Message(id: "3", role: .match, content: "Aw what's the matter?", createdAt: Date(timeIntervalSinceReferenceDate: 200)),
+            Message(id: "4", role: .host, content: "I didn't understand that. Please try again.", createdAt: Date(timeIntervalSinceReferenceDate: 300)),
+            Message(id: "5", role: .userPrompt, content: "Open the right door", createdAt: Date(timeIntervalSinceReferenceDate: 400))
+        ]
     )
+
+    static var previews: some View {
+        DetailView()
+    }
 }

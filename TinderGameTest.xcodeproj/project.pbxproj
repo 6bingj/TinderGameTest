@@ -14,6 +14,8 @@
 		85031ADF2C28CD3D0060DF89 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031ADE2C28CD3D0060DF89 /* DetailView.swift */; };
 		85031AE12C28CD9A0060DF89 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE02C28CD9A0060DF89 /* Conversation.swift */; };
 		85031AE32C28DB740060DF89 /* ScriptedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE22C28DB740060DF89 /* ScriptedResponse.swift */; };
+		85031AE62C292FB70060DF89 /* MessageHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE52C292FB70060DF89 /* MessageHandling.swift */; };
+		85031AE82C29320B0060DF89 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE72C29320B0060DF89 /* ChatBubble.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		85031ADE2C28CD3D0060DF89 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		85031AE02C28CD9A0060DF89 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		85031AE22C28DB740060DF89 /* ScriptedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptedResponse.swift; sourceTree = "<group>"; };
+		85031AE52C292FB70060DF89 /* MessageHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandling.swift; sourceTree = "<group>"; };
+		85031AE72C29320B0060DF89 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				85031AD02C28CB8D0060DF89 /* TinderGameTestApp.swift */,
 				85031AD22C28CB8D0060DF89 /* ContentView.swift */,
 				85031ADE2C28CD3D0060DF89 /* DetailView.swift */,
+				85031AE72C29320B0060DF89 /* ChatBubble.swift */,
+				85031AE52C292FB70060DF89 /* MessageHandling.swift */,
 				85031AD42C28CB900060DF89 /* Assets.xcassets */,
 				85031AD62C28CB900060DF89 /* Preview Content */,
 			);
@@ -156,9 +162,11 @@
 			files = (
 				85031AE12C28CD9A0060DF89 /* Conversation.swift in Sources */,
 				85031AD32C28CB8D0060DF89 /* ContentView.swift in Sources */,
+				85031AE62C292FB70060DF89 /* MessageHandling.swift in Sources */,
 				85031AE32C28DB740060DF89 /* ScriptedResponse.swift in Sources */,
 				85031ADF2C28CD3D0060DF89 /* DetailView.swift in Sources */,
 				85031AD12C28CB8D0060DF89 /* TinderGameTestApp.swift in Sources */,
+				85031AE82C29320B0060DF89 /* ChatBubble.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
