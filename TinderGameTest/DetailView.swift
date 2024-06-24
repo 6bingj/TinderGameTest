@@ -9,12 +9,10 @@ import SwiftUI
 
 struct DetailView: View {
     @State var inputText: String = ""
-//    @FocusState private var isFocused: Bool
-
 
     let conversation: Conversation
     let error: Error?
-    let sendMessage: (String) -> Void
+    let sendMessage: (String, MessageRole) -> Void
 
     private var fillColor: Color {
         return Color(uiColor: UIColor.systemBackground)
@@ -44,6 +42,8 @@ struct DetailView: View {
 //                    if let error = error {
 //                        errorMessage(error: error)
 //                    }
+                    
+                    optionButtons()
 
                     inputBar()
                 }
@@ -51,6 +51,38 @@ struct DetailView: View {
         }
     }
 
+    @ViewBuilder private func optionButtons() -> some View {
+        if let level = levels[currentLevel] {
+            ForEach(level.options, id: \.self) { option in
+                Button(action: {
+                    handleOptionSelection(option)
+                }) {
+                    Text(option)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .background(Color.white) // This should match the background color of your overall view to make it transparent
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 40)
+                                .stroke(Color(red: 241 / 255, green: 116 / 255, blue: 189 / 255), lineWidth: 2) // Border color and width
+                        )
+                    if option == level.correctOption {
+//                        Text("check")
+                        //TODO: add match profile picture to show they selected this
+                    }
+                }
+            }
+        }
+    }
+    
+    private func handleOptionSelection(_ option: String) {
+        if let level = levels[currentLevel], option == level.correctOption {
+            sendMessage(option, .userPrompt)
+        } else {
+            sendMessage("Hmmm yeah but I think the other option is better. Please?", .match)
+        }
+    }
+
+    
     @ViewBuilder private func inputBar() -> some View {
         HStack {
             TextEditor(
@@ -79,11 +111,6 @@ struct DetailView: View {
                 )
             )
             .fixedSize(horizontal: false, vertical: true)
-//            .onSubmit {
-//                withAnimation {
-//                    tapSendMessage()
-//                }
-//            }
             .padding(.leading)
 
             Button(action: {
@@ -107,12 +134,13 @@ struct DetailView: View {
         if message.isEmpty {
             return
         }
+
+        let messageRole: MessageRole = levels.keys.contains(message.lowercased()) ? .userPrompt : .user
         
-        sendMessage(message)
+        sendMessage(message, messageRole)
         inputText = ""
-        
+
     }
-    
     
     private func scrollToLastMessage(with scrollViewProxy: ScrollViewProxy) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -193,6 +221,22 @@ struct ChatBubble: View {
                     ThreeRoundedCornersShape(corners: [.topLeft, .topRight, .bottomRight], radius: 16)
                   )
               Spacer(minLength: 24)
+                
+                
+            case .userPrompt:
+                Spacer(minLength: 24)
+                Text(message.content)
+                    .foregroundColor(.black)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+//                    .background(Color.clear) // This should match the background color of your overall view to make it transparent
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 40)
+//                            .stroke(Color(red: 241 / 255, green: 116 / 255, blue: 189 / 255), lineWidth: 2) // Border color and width
+//                    )
+                Spacer(minLength: 24)
+
+    
             }
         }
     }
@@ -203,19 +247,18 @@ struct ChatBubble: View {
         conversation: Conversation(
             id: "1",
             messages: [
-                Message(id: "1", role: .user, content: "Hello, how can I help you today?", createdAt: Date(timeIntervalSinceReferenceDate: 0)),
-                Message(id: "2", role: .user, content: "I need help with my subscription.", createdAt: Date(timeIntervalSinceReferenceDate: 100)),
-                Message(id: "3", role: .match, content: "Sure, what seems to be the problem with your subscription?", createdAt: Date(timeIntervalSinceReferenceDate: 200)),
+                Message(id: "1", role: .user, content: "Hello?", createdAt: Date(timeIntervalSinceReferenceDate: 0)),
+                Message(id: "2", role: .user, content: "I need help.", createdAt: Date(timeIntervalSinceReferenceDate: 100)),
+                Message(id: "3", role: .match, content: "Aw what's the matter?", createdAt: Date(timeIntervalSinceReferenceDate: 200)),
                 Message(id: "4", role: .host, content:
                           """
-                          get_current_weather({
-                            "location": "Glasgow, Scotland",
-                            "format": "celsius"
-                          })
-                          """, createdAt: Date(timeIntervalSinceReferenceDate: 200))
+                          Magna nulla tempor in. Proident laboris et laborum. Occaecat aute adipisicing duis excepteur non non elit Lorem voluptate irure. Do Lorem nostrud aute aute aliquip enim. Ad exercitation ut enim adipisicing irure amet aute laboris magna culpa labore aliqua. Fugiat et aute cupidatat eu ea qui sunt labore. Lorem culpa elit cillum labore duis ea ad ex duis aliqua ex veniam.
+                          """, createdAt: Date(timeIntervalSinceReferenceDate: 200)),
+                Message(id: "5", role: .userPrompt, content: "Open the right door", createdAt: Date(timeIntervalSinceReferenceDate: 200))
+
             ]
         ),
         error: nil,
-        sendMessage: { _ in }
+        sendMessage: { _,_  in }
     )
 }

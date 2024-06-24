@@ -6,24 +6,6 @@
 //
 
 import SwiftUI
-//
-//struct ContentView: View {
-//    var body: some View {
-//        VStack {
-//            Image(systemName: "globe")
-//                .imageScale(.large)
-//                .foregroundStyle(.tint)
-//            Text("Hello, world!")
-//        }
-//        .padding()
-//    }
-//}
-//
-//#Preview {
-//    ContentView()
-//}
-
-import SwiftUI
 
 struct ContentView: View {
     @State private var conversation = initialConversation
@@ -37,16 +19,24 @@ struct ContentView: View {
         )
     }
     
-    private func sendMessage(_ message: String) {
-        let newMessage = Message(id: UUID().uuidString, role: .user, content: message, createdAt: Date())
+    private func sendMessage(_ message: String, role: MessageRole) {
+        let newMessage = Message(id: UUID().uuidString, role: role, content: message, createdAt: Date())
         conversation.messages.append(newMessage)
         
-        if let response = script.first(where: { $0.userMessage.lowercased() == message.lowercased() }) {
-            let aiMessage = Message(id: UUID().uuidString, role: .host, content: response.aiResponse, createdAt: Date())
-            conversation.messages.append(aiMessage)
-        } else {
-            let errorMessage = Message(id: UUID().uuidString, role: .host, content: "I didn't understand that. Please try again.", createdAt: Date())
-            conversation.messages.append(errorMessage)
+        if role == .userPrompt {
+            if let level = levels[currentLevel]
+             {
+                let aiMessage = Message(id: UUID().uuidString, role: .host, content: level.description, createdAt: Date())
+                conversation.messages.append(aiMessage)
+                currentLevel = level.correctOption
+            } else {
+                let errorMessage = Message(id: UUID().uuidString, role: .host, content: "I didn't understand that. Please try again.", createdAt: Date())
+                conversation.messages.append(errorMessage)
+            }
+        } else if role == .user {
+            let matchResponse = "Thanks for your input. Let's see what happens next."
+            let matchMessage = Message(id: UUID().uuidString, role: .match, content: matchResponse, createdAt: Date())
+            conversation.messages.append(matchMessage)
         }
     }
 }
