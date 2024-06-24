@@ -21,15 +21,7 @@ class DetailViewModel: ObservableObject {
     }
 
     func handleOptionSelection(_ option: String) {
-        if let level = levels[currentLevel], option == level.correctOption {
             sendMessage(option, .userPrompt)
-        } else {
-            
-            sendMessage("Oops.. you two selected different option. Please discuss and come to an agreement to move on.", .host)
-            
-            sendMessage("lol I'm not changing my option tho.", .match)
-            
-        }
     }
 
     func tapSendMessage() {
@@ -64,46 +56,56 @@ class DetailViewModel: ObservableObject {
             //immediately append user message
             conversation.messages.append(newMessage)//append immediately
         } else {
-            appendWithCumulativeRandomDelay(newMessage, cumulativeDelay: &cumulativeDelay)
+            appendWithCumulativeRandomDelay(newMessage)
         }
         
         // Follow up to the initial message
         if role == .userPrompt {
-            if let level = levels[currentLevel] { // User selected correct prompt, level up
+            if let level = levels[currentLevel], message == level.correctOption { // User selected correct prompt, level up
                 currentLevel = level.correctOption // Update level
                 if let newLevel = levels[currentLevel] {
                     
                     // Add Host's description message
                     let aiMessage = Message(id: UUID().uuidString, role: .host, content: newLevel.description, createdAt: Date())
-                    appendWithCumulativeRandomDelay(aiMessage, cumulativeDelay: &cumulativeDelay)
+                    appendWithCumulativeRandomDelay(aiMessage)
                     
                     // Add Match's follow-up messages
                     for followUp in newLevel.matchMessages {
                         let matchMessage = Message(id: UUID().uuidString, role: .match, content: followUp, createdAt: Date())
-                        appendWithCumulativeRandomDelay(matchMessage, cumulativeDelay: &cumulativeDelay)
+                        appendWithCumulativeRandomDelay(matchMessage)
                     }
                     
                     let systemMessage = Message(id: UUID().uuidString, role: .system, content: "John has made their selection", createdAt: Date())
-                    appendWithCumulativeRandomDelay(systemMessage, cumulativeDelay: &cumulativeDelay)
+                    appendWithCumulativeRandomDelay(systemMessage)
                     
                 }
+            } else if let level = levels[currentLevel] { //User selected wrong prompt
+                
+                let aiMessage = Message(id: UUID().uuidString, role: .host, content: "Oops.. you two selected different option. Please discuss and come to an agreement to move on.", createdAt: Date())
+                let matchMessage = Message(id: UUID().uuidString, role: .match, content: "lol I'm not changing my option tho.", createdAt: Date())
+
+                appendWithCumulativeRandomDelay(aiMessage)
+                appendWithCumulativeRandomDelay(matchMessage)
+                
             } else {
                 let errorMessage = Message(id: UUID().uuidString, role: .host, content: "I didn't understand that. Please try again.", createdAt: Date())
-                appendWithCumulativeRandomDelay(errorMessage, cumulativeDelay: &cumulativeDelay)
+                appendWithCumulativeRandomDelay(errorMessage)
             }
         } else if role == .user { // user is chatting with the match
             let matchResponse = "Thanks for your input. Let's see what happens next."
             let matchMessage = Message(id: UUID().uuidString, role: .match, content: matchResponse, createdAt: Date())
-            appendWithCumulativeRandomDelay(matchMessage, cumulativeDelay: &cumulativeDelay)
+            appendWithCumulativeRandomDelay(matchMessage)
+        }
+        
+        func appendWithCumulativeRandomDelay(_ content: Message) {
+            let randomIncrement = Double.random(in: 0.7...1.1)
+            cumulativeDelay += randomIncrement
+            DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
+                self.conversation.messages.append(content)
+            }
         }
     }
 
-    func appendWithCumulativeRandomDelay(_ content: Message, cumulativeDelay: inout Double) {
-        let randomIncrement = Double.random(in: 0.7...1.1)
-        cumulativeDelay += randomIncrement
-        DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
-            self.conversation.messages.append(content)
-        }
-    }
+
     
 }
