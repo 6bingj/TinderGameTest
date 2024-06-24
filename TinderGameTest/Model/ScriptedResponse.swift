@@ -39,8 +39,7 @@ let levels: [String: Level] = [
         correctOption: "open the left door",
         matchMessages: [
             "Ugh, so creepy... Which door should we choose? 🤔",
-            "The whispers are giving me chills. Left door maybe?",
-            "Let's try the left door first. What do you think? 😅"
+            "Let's discuss which option to chose before we select",
         ]
     ),
     "open the left door": Level(

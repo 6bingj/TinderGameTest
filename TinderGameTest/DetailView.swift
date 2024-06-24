@@ -7,58 +7,6 @@
 
 import SwiftUI
 
-class DetailViewModel: ObservableObject {
-    @Published var inputText: String = ""
-    @Published var conversation: Conversation = initialConversation
-    @Published var currentLevel: String = "pre-start"
-    
-    var fillColor: Color {
-        return Color(uiColor: UIColor.systemBackground)
-    }
-
-    var strokeColor: Color {
-        return Color(uiColor: UIColor.systemGray5)
-    }
-
-    func handleOptionSelection(_ option: String) {
-        if let level = levels[currentLevel], option == level.correctOption {
-            sendMessage(option, .userPrompt)
-        } else {
-            
-            sendMessage("Oops.. you two selected different option. Please discuss and come to an agreement to move on.", .host)
-            
-            sendMessage("lol I'm not changing my option tho.", .match)
-            
-        }
-    }
-
-    func tapSendMessage() {
-        let message = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
-        if message.isEmpty {
-            return
-        }
-
-        let messageRole: MessageRole = levels.keys.contains(message.lowercased()) ? .userPrompt : .user
-        //TODO: This should examine current the options, not all keys
-        
-        sendMessage(message, messageRole)
-        inputText = ""
-    }
-
-    func scrollToLastMessage(with scrollViewProxy: ScrollViewProxy) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if let lastMessage = self.conversation.messages.last {
-                withAnimation {
-                    scrollViewProxy.scrollTo(lastMessage.id, anchor: .bottom)
-                }
-            }
-        }
-    }
-
-    func sendMessage(_ message: String, _ role: MessageRole) {
-        MessageHandling.sendMessage(message, role: role, conversation: &conversation, currentLevel: &currentLevel)
-    }
-}
 
 
 
