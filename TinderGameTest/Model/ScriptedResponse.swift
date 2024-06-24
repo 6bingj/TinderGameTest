@@ -10,10 +10,7 @@ import Foundation
 var initialConversation = Conversation(
     id: "1",
     messages: [
-        Message(id: "1", role: .host, content:"""
-                    Welcome to the Haunted House Escape! You need to work together to find clues and solve puzzles to escape this ever-changing mansion. You have 20 minutes. Good luck! Tap "Start" to begin your exploration. You could chat with your match at anytime to discuss your options.
-                """
-                , createdAt: Date())
+        Message(id: "1", role: .host, content:levels["pre-start"]?.description ?? "Start point", createdAt: Date())
     ]
 )
 
@@ -25,6 +22,13 @@ struct Level {
 }
 
 let levels: [String: Level] = [
+    "pre-start": Level(
+        description: """
+                Welcome to the Haunted House Escape! You need to work together to find clues and solve puzzles to escape this ever-changing mansion. You have 20 minutes. Good luck! Tap "Start" to begin your exploration. You could chat with your match at anytime to discuss your options.
+                """,
+        options: ["start"],
+        correctOption: "start"
+    ),
     "start": Level(
         description: "You find yourselves in the mansion's dimly lit foyer. The air is cold, and the sound of distant whispers sends shivers down your spine. The front door is locked. There are two doors, one to the left and one to the right.",
         options: ["open the left door", "open the right door"],
@@ -52,4 +56,4 @@ let levels: [String: Level] = [
     )
 ]
 
-var currentLevel = "start"
+var currentLevel = "pre-start"

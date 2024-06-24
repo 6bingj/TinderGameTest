@@ -34,6 +34,7 @@ class DetailViewModel: ObservableObject {
         }
 
         let messageRole: MessageRole = levels.keys.contains(message.lowercased()) ? .userPrompt : .user
+        //TODO: This should examine current the options, not all keys
         
         sendMessage(message, messageRole)
         inputText = ""

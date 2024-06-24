@@ -14,9 +14,10 @@ class MessageHandling {
         
         if role == .userPrompt {
             if let level = levels[currentLevel] {
-                let aiMessage = Message(id: UUID().uuidString, role: .host, content: level.description, createdAt: Date())
+                currentLevel = level.correctOption //update level
+                let description = levels[currentLevel]?.description ?? "" //get the new level description
+                let aiMessage = Message(id: UUID().uuidString, role: .host, content: description, createdAt: Date())
                 conversation.messages.append(aiMessage)
-                currentLevel = level.correctOption
             } else {
                 let errorMessage = Message(id: UUID().uuidString, role: .host, content: "I didn't understand that. Please try again.", createdAt: Date())
                 conversation.messages.append(errorMessage)
