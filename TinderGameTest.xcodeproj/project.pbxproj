@@ -11,12 +11,12 @@
 		85031AD32C28CB8D0060DF89 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AD22C28CB8D0060DF89 /* ContentView.swift */; };
 		85031AD52C28CB900060DF89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85031AD42C28CB900060DF89 /* Assets.xcassets */; };
 		85031AD82C28CB900060DF89 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85031AD72C28CB900060DF89 /* Preview Assets.xcassets */; };
-		85031ADF2C28CD3D0060DF89 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031ADE2C28CD3D0060DF89 /* DetailView.swift */; };
+		85031ADF2C28CD3D0060DF89 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031ADE2C28CD3D0060DF89 /* ChatView.swift */; };
 		85031AE12C28CD9A0060DF89 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE02C28CD9A0060DF89 /* Conversation.swift */; };
 		85031AE32C28DB740060DF89 /* ScriptedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE22C28DB740060DF89 /* ScriptedResponse.swift */; };
 		85031AE62C292FB70060DF89 /* MessageHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE52C292FB70060DF89 /* MessageHandling.swift */; };
 		85031AE82C29320B0060DF89 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE72C29320B0060DF89 /* ChatBubble.swift */; };
-		85031AEA2C29D84E0060DF89 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE92C29D84E0060DF89 /* DetailViewModel.swift */; };
+		85031AEA2C29D84E0060DF89 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE92C29D84E0060DF89 /* ChatViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,12 +25,12 @@
 		85031AD22C28CB8D0060DF89 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		85031AD42C28CB900060DF89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85031AD72C28CB900060DF89 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		85031ADE2C28CD3D0060DF89 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		85031ADE2C28CD3D0060DF89 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		85031AE02C28CD9A0060DF89 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		85031AE22C28DB740060DF89 /* ScriptedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptedResponse.swift; sourceTree = "<group>"; };
 		85031AE52C292FB70060DF89 /* MessageHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandling.swift; sourceTree = "<group>"; };
 		85031AE72C29320B0060DF89 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
-		85031AE92C29D84E0060DF89 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		85031AE92C29D84E0060DF89 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,15 +63,15 @@
 		85031ACF2C28CB8D0060DF89 /* TinderGameTest */ = {
 			isa = PBXGroup;
 			children = (
+				85031AD42C28CB900060DF89 /* Assets.xcassets */,
+				85031AD62C28CB900060DF89 /* Preview Content */,
 				85031AE42C29034B0060DF89 /* Model */,
 				85031AD02C28CB8D0060DF89 /* TinderGameTestApp.swift */,
 				85031AD22C28CB8D0060DF89 /* ContentView.swift */,
-				85031ADE2C28CD3D0060DF89 /* DetailView.swift */,
-				85031AE92C29D84E0060DF89 /* DetailViewModel.swift */,
+				85031ADE2C28CD3D0060DF89 /* ChatView.swift */,
+				85031AE92C29D84E0060DF89 /* ChatViewModel.swift */,
 				85031AE72C29320B0060DF89 /* ChatBubble.swift */,
 				85031AE52C292FB70060DF89 /* MessageHandling.swift */,
-				85031AD42C28CB900060DF89 /* Assets.xcassets */,
-				85031AD62C28CB900060DF89 /* Preview Content */,
 			);
 			path = TinderGameTest;
 			sourceTree = "<group>";
@@ -167,10 +167,10 @@
 				85031AD32C28CB8D0060DF89 /* ContentView.swift in Sources */,
 				85031AE62C292FB70060DF89 /* MessageHandling.swift in Sources */,
 				85031AE32C28DB740060DF89 /* ScriptedResponse.swift in Sources */,
-				85031ADF2C28CD3D0060DF89 /* DetailView.swift in Sources */,
+				85031ADF2C28CD3D0060DF89 /* ChatView.swift in Sources */,
 				85031AD12C28CB8D0060DF89 /* TinderGameTestApp.swift in Sources */,
 				85031AE82C29320B0060DF89 /* ChatBubble.swift in Sources */,
-				85031AEA2C29D84E0060DF89 /* DetailViewModel.swift in Sources */,
+				85031AEA2C29D84E0060DF89 /* ChatViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,51 @@
 
 import SwiftUI
 
+@ViewBuilder func inputBar(_ text: Binding<String>, fillColor: Color, strokeColor: Color, tapSendMessage: @escaping () -> Void) -> some View {
+    HStack {
+        TextEditor(
+            text: text
+        )
+        .padding(.vertical, -8)
+        .padding(.horizontal, -4)
+        .frame(minHeight: 22, maxHeight: 300)
+        .foregroundColor(.primary)
+        .padding(EdgeInsets(top: 12, leading: 16, bottom: 12, trailing: 16))
+        .background(
+            RoundedRectangle(
+                cornerRadius: 16,
+                style: .continuous
+            )
+            .fill(fillColor)
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: 16,
+                    style: .continuous
+                )
+                .stroke(
+                    strokeColor,
+                    lineWidth: 1
+                )
+            )
+        )
+        .fixedSize(horizontal: false, vertical: true)
+        .padding(.leading)
+
+        Button(action: {
+            withAnimation {
+                tapSendMessage()
+            }
+        }) {
+            Image(systemName: "arrow.up.circle.fill")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 24, height: 24)
+                .padding(.trailing)
+        }
+        .disabled(text.wrappedValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+    }
+    .padding(.bottom)
+}
 
 struct ThreeRoundedCornersShape: Shape {
     var corners: UIRectCorner
@@ -113,7 +158,7 @@ struct ChatBubble_Previews: PreviewProvider {
     )
 
     static var previews: some View {
-        DetailView()
+        ChatView()
     }
 }
 

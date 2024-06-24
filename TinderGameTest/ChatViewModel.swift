@@ -7,10 +7,18 @@
 
 import SwiftUI
 
-class DetailViewModel: ObservableObject {
+class ChatViewModel: ObservableObject {
     @Published var inputText: String = ""
-    @Published var conversation: Conversation = initialConversation
+    @Published var conversationGame: Conversation = initialConversation
+    @Published var conversationReg: Conversation = initialConversation
+    @Published var gameMode: Bool = false
+    
+     var conversationExposed: Conversation {
+        gameMode ? conversationGame : conversationReg
+    }
+    
     @Published var currentLevel: String = "pre-start"
+    
     
     var fillColor: Color {
         return Color(uiColor: UIColor.systemBackground)
@@ -21,7 +29,7 @@ class DetailViewModel: ObservableObject {
     }
 
     func handleOptionSelection(_ option: String) {
-            sendMessage(option, .userPrompt)
+            sendGameMessage(option, .userPrompt)
     }
 
     func tapSendMessage() {
@@ -29,17 +37,22 @@ class DetailViewModel: ObservableObject {
         if message.isEmpty {
             return
         }
-
-        let messageRole: MessageRole = levels.keys.contains(message.lowercased()) ? .userPrompt : .user
-        //TODO: This should examine current the options, not all keys
         
-        sendMessage(message, messageRole)
-        inputText = ""
+        if gameMode{
+            let messageRole: MessageRole = levels.keys.contains(message.lowercased()) ? .userPrompt : .user
+            //TODO: This should examine current the options, not all keys
+            sendGameMessage(message, messageRole)
+            inputText = ""
+        } else {
+            sendRegMessage(message, .user)
+            inputText = ""
+
+        }
     }
 
     func scrollToLastMessage(with scrollViewProxy: ScrollViewProxy) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if let lastMessage = self.conversation.messages.last {
+            if let lastMessage = self.conversationExposed.messages.last {
                 withAnimation {
                     scrollViewProxy.scrollTo(lastMessage.id, anchor: .bottom)
                 }
@@ -47,14 +60,25 @@ class DetailViewModel: ObservableObject {
         }
     }
     
+    func sendRegMessage(_ message: String, _ role: MessageRole) {
+        let newMessage = Message(id: UUID().uuidString, role: role, content: message, createdAt: Date())
+        conversationReg.messages.append(newMessage)//append immediately
+        let matchMessage = Message(id: UUID().uuidString, role: .match, content: "followUp", createdAt: Date())
+        
+        let randomDelay = Double.random(in: 0.7...1.1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + randomDelay) {
+            self.conversationReg.messages.append(matchMessage)
+        }
+
+    }
     
-    func sendMessage(_ message: String, _ role: MessageRole) {
+    func sendGameMessage(_ message: String, _ role: MessageRole) {
         let newMessage = Message(id: UUID().uuidString, role: role, content: message, createdAt: Date())
         var cumulativeDelay: Double = 0
         
         if role == .user || role == .userPrompt {
             //immediately append user message
-            conversation.messages.append(newMessage)//append immediately
+            conversationGame.messages.append(newMessage)//append immediately
         } else {
             appendWithCumulativeRandomDelay(newMessage)
         }
@@ -101,7 +125,7 @@ class DetailViewModel: ObservableObject {
             let randomIncrement = Double.random(in: 0.7...1.1)
             cumulativeDelay += randomIncrement
             DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
-                self.conversation.messages.append(content)
+                self.conversationGame.messages.append(content)
             }
         }
     }
