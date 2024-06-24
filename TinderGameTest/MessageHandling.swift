@@ -8,7 +8,8 @@
 import SwiftUI
 
 class MessageHandling {
-    static func sendMessage(_ message: String, role: MessageRole, conversation: inout Conversation) {
+    
+    static func sendMessage(_ message: String, role: MessageRole, conversation: inout Conversation, currentLevel: inout String) {
         let newMessage = Message(id: UUID().uuidString, role: role, content: message, createdAt: Date())
         conversation.messages.append(newMessage)
         
@@ -25,6 +26,10 @@ class MessageHandling {
                         let matchMessage = Message(id: UUID().uuidString, role: .match, content: followUp, createdAt: Date())
                         conversation.messages.append(matchMessage)
                     }
+                    
+                    let systemMessage = Message(id: UUID().uuidString, role: .system, content: "John has made their selection", createdAt: Date())
+                    conversation.messages.append(systemMessage)
+                    
                 }
             } else {
                 let errorMessage = Message(id: UUID().uuidString, role: .host, content: "I didn't understand that. Please try again.", createdAt: Date())

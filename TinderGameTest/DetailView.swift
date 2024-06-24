@@ -10,7 +10,8 @@ import SwiftUI
 class DetailViewModel: ObservableObject {
     @Published var inputText: String = ""
     @Published var conversation: Conversation = initialConversation
-
+    @Published var currentLevel: String = "pre-start"
+    
     var fillColor: Color {
         return Color(uiColor: UIColor.systemBackground)
     }
@@ -23,7 +24,11 @@ class DetailViewModel: ObservableObject {
         if let level = levels[currentLevel], option == level.correctOption {
             sendMessage(option, .userPrompt)
         } else {
-            sendMessage("Hmmm yeah but I think the other option is better. Please?", .match)
+            
+            sendMessage("Oops.. you two selected different option. Please discuss and come to an agreement to move on.", .host)
+            
+            sendMessage("lol I'm not changing my option tho.", .match)
+            
         }
     }
 
@@ -51,7 +56,7 @@ class DetailViewModel: ObservableObject {
     }
 
     func sendMessage(_ message: String, _ role: MessageRole) {
-        MessageHandling.sendMessage(message, role: role, conversation: &conversation)
+        MessageHandling.sendMessage(message, role: role, conversation: &conversation, currentLevel: &currentLevel)
     }
 }
 
@@ -86,7 +91,7 @@ struct DetailView: View {
     }
 
     @ViewBuilder private func optionButtons() -> some View {
-        if let level = levels[currentLevel] {
+        if let level = levels[viewModel.currentLevel] {
             ForEach(level.options, id: \.self) { option in
                 Button(action: {
                     viewModel.handleOptionSelection(option)

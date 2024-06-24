@@ -83,14 +83,15 @@ struct ChatBubble: View {
                     .foregroundColor(.black)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
-//                    .background(Color.clear) // This should match the background color of your overall view to make it transparent
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 40)
-//                            .stroke(Color(red: 241 / 255, green: 116 / 255, blue: 189 / 255), lineWidth: 2) // Border color and width
-//                    )
                 Spacer(minLength: 24)
 
-    
+            case .system:
+                Spacer(minLength: 24)
+                Text(message.content)
+                    .foregroundColor(.black)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                Spacer(minLength: 24)
             }
         }
     }

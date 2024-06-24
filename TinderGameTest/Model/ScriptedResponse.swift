@@ -45,7 +45,7 @@ let levels: [String: Level] = [
     ),
     "open the left door": Level(
         description: "The left door creaks open, revealing a dusty library. Shelves of old books line the walls, and a large portrait of a stern-looking man hangs above a fireplace. A strange symbol is carved into the mantelpiece.",
-        options: ["examine the portrait", "open the right door"],
+        options: ["examine the portrait", "back to the right door"],
         correctOption: "examine the portrait",
         matchMessages: [
             "A library! Bet there's something hidden here. 📚",
@@ -84,5 +84,3 @@ let levels: [String: Level] = [
         ]
     )
 ]
-
-var currentLevel = "pre-start"

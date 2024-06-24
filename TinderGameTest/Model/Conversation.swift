@@ -38,4 +38,5 @@ enum MessageRole: String, Codable, Equatable, CaseIterable {
     case host
     case match
     case userPrompt
+    case system
 }
