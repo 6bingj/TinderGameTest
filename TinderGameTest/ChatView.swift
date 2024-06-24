@@ -9,27 +9,68 @@ import SwiftUI
 
 struct ChatView: View {
     @StateObject private var viewModel = ChatViewModel()
-
+    
     var body: some View {
         NavigationStack {
-                VStack {
-                    if viewModel.gameMode {
-                        gameChatView
-                            .transition(.asymmetric(
-                                insertion: .move(edge: .bottom).combined(with: .opacity),
-                                removal: .move(edge: .bottom).combined(with: .opacity)
-                            ))
-                    } else {
-                        regChatView
-                            .transition(.asymmetric(
-                                insertion: .move(edge: .top).combined(with: .opacity),
-                                removal: .move(edge: .top).combined(with: .opacity)
-                            ))
-                    }
+            VStack {
+                if viewModel.gameMode {
+                    gameChatView
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .bottom).combined(with: .opacity),
+                            removal: .move(edge: .bottom).combined(with: .opacity)
+                        ))
+                } else {
+                    regChatView
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .top).combined(with: .opacity),
+                            removal: .move(edge: .top).combined(with: .opacity)
+                        ))
+                }
+                
+                HStack(alignment:.center) {
+                    gameButton
                     inputBar($viewModel.inputText, fillColor: viewModel.fillColor, strokeColor: viewModel.strokeColor, tapSendMessage: viewModel.tapSendMessage)
                 }
+                
+                if viewModel.showBottomSheet {
+                    bottomSheet
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .bottom).combined(with: .opacity),
+                            removal: .move(edge: .bottom).combined(with: .opacity)
+                        ))
+                }
+            }
             
         }
+    }
+    
+    @ViewBuilder private var gameButton: some View {
+        if viewModel.gameMode{
+            Button {
+                withAnimation {
+                    viewModel.gameMode.toggle()
+                }
+            } label: {
+                Image(systemName: "arrowshape.backward.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24, height: 24)
+            }
+            .padding()
+        } else {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    viewModel.showBottomSheet.toggle()
+                }
+            } label: {
+                Image(systemName: "gamecontroller")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24, height: 24)
+            }
+            .padding()
+        }
+        
     }
     
     @ViewBuilder private var gameChatView: some View {
@@ -47,15 +88,9 @@ struct ChatView: View {
                 viewModel.scrollToLastMessage(with: scrollViewProxy)
             }
         }
+        
         optionButtons()
         
-        Button {
-            withAnimation {
-                viewModel.gameMode.toggle()
-            }
-        } label: {
-            Text("toggle")
-        }
     }
     
     @ViewBuilder private var regChatView: some View {
@@ -74,16 +109,8 @@ struct ChatView: View {
             }
         }
         
-        Button {
-            withAnimation {
-                viewModel.gameMode.toggle()
-            }
-        } label: {
-            Text("toggle")
-                .foregroundStyle(.cyan)
-        }
     }
-
+    
     @ViewBuilder private func optionButtons() -> some View {
         if let level = levels[viewModel.currentLevel] {
             ForEach(level.options, id: \.self) { option in
@@ -106,13 +133,45 @@ struct ChatView: View {
         }
     }
     
+    @ViewBuilder private var bottomSheet: some View {
+        ScrollView {
+            Text("Break the Ice with the AI Game Master")
+            
+            Button {
+                viewModel.showBottomSheet.toggle()
+                withAnimation{
+                    viewModel.gameMode.toggle()
+                }
+                
+            } label: {
+                VStack(alignment: .leading) {
+                    Text("Haunted House Escape")
+                        .font(.title2)
+                    Text("A special storyline generated just for you. Ask any questions to the AI host, and escape together!")
+                        .font(.subheadline)
+                        .multilineTextAlignment(.leading)
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 25.0)
+                        .fill(.gray)
+                )
+                .padding()
+            }
+            .tint(.white)
+            
+        }
+        .background()
+        .frame(maxHeight: 300)
+    }
+    
 }
 
 
 
 
 struct GameView_Previews: PreviewProvider {
-
+    
     static var previews: some View {
         ChatView()
     }

@@ -12,6 +12,7 @@ class ChatViewModel: ObservableObject {
     @Published var conversationGame: Conversation = initialGameConversation
     @Published var conversationReg: Conversation = initialRegConversation
     @Published var gameMode: Bool = false
+    @Published var showBottomSheet: Bool = false
     
      var conversationExposed: Conversation {
         gameMode ? conversationGame : conversationReg
