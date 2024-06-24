@@ -13,11 +13,19 @@ class MessageHandling {
         conversation.messages.append(newMessage)
         
         if role == .userPrompt {
-            if let level = levels[currentLevel] {
-                currentLevel = level.correctOption //update level
-                let description = levels[currentLevel]?.description ?? "" //get the new level description
-                let aiMessage = Message(id: UUID().uuidString, role: .host, content: description, createdAt: Date())
-                conversation.messages.append(aiMessage)
+            if let level = levels[currentLevel] { // User selected correct prompt, level up
+                currentLevel = level.correctOption // Update level
+                if let newLevel = levels[currentLevel] {
+                    // Add Host's description message
+                    let aiMessage = Message(id: UUID().uuidString, role: .host, content: newLevel.description, createdAt: Date())
+                    conversation.messages.append(aiMessage)
+                    
+                    // Add Match's follow-up messages
+                    for followUp in newLevel.matchMessages {
+                        let matchMessage = Message(id: UUID().uuidString, role: .match, content: followUp, createdAt: Date())
+                        conversation.messages.append(matchMessage)
+                    }
+                }
             } else {
                 let errorMessage = Message(id: UUID().uuidString, role: .host, content: "I didn't understand that. Please try again.", createdAt: Date())
                 conversation.messages.append(errorMessage)
