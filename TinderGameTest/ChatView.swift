@@ -19,6 +19,14 @@ struct ChatView: View {
                             insertion: .move(edge: .bottom).combined(with: .opacity),
                             removal: .move(edge: .bottom).combined(with: .opacity)
                         ))
+                        .alert("Exit the game?", isPresented: $viewModel.exitGameAlert) {
+                            Button("Exit") {
+                                withAnimation {
+                                    viewModel.exitGame()
+                                }
+                            }
+                            Button("Cancel", role: .cancel, action: {})
+                        }
                 } else {
                     regChatView
                         .transition(.asymmetric(
@@ -47,16 +55,15 @@ struct ChatView: View {
     @ViewBuilder private var gameButton: some View {
         if viewModel.gameMode{
             Button {
-                withAnimation {
-                    viewModel.gameMode.toggle()
-                }
+                viewModel.exitGameAlert.toggle()
             } label: {
-                Image(systemName: "arrowshape.backward.fill")
+                Image(systemName: "door.right.hand.open")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 24, height: 24)
             }
             .padding()
+            
         } else {
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
@@ -112,7 +119,7 @@ struct ChatView: View {
     }
     
     @ViewBuilder private func optionButtons() -> some View {
-        if let level = levels[viewModel.currentLevel] {
+        if let level = levels[viewModel.currentLevel], viewModel.allowInput {
             ForEach(level.options, id: \.self) { option in
                 Button(action: {
                     viewModel.handleOptionSelection(option)
@@ -129,6 +136,7 @@ struct ChatView: View {
                         // Additional UI elements for correct option
                     }
                 }
+                .disabled(!viewModel.allowInput)
             }
         }
     }

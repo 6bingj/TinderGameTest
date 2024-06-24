@@ -91,5 +91,12 @@ let levels: [String: Level] = [
             "The note says 'heart of the mansion'. Should we try the front door?",
             "Let's use the key on the front door and see if it works! 🗝️"
         ]
+    ),
+    "use the key to open the front door": Level(
+        description: "YOU WIN!!!!!!'",
+        options: [],
+        correctOption: "",
+        matchMessages: [
+        ]
     )
 ]

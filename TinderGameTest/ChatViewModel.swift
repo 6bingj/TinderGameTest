@@ -9,17 +9,47 @@ import SwiftUI
 
 class ChatViewModel: ObservableObject {
     @Published var inputText: String = ""
-    @Published var conversationGame: Conversation = initialGameConversation
-    @Published var conversationReg: Conversation = initialRegConversation
-    @Published var gameMode: Bool = false
     @Published var showBottomSheet: Bool = false
+    @Published var exitGameAlert: Bool = false
+    @Published var allowInput: Bool = true //allow user to choose prompt when follow-up messages are finished
     
      var conversationExposed: Conversation {
         gameMode ? conversationGame : conversationReg
     }
     
-    @Published var currentLevel: String = "pre-start"
+    //MARK: - game mode control
+    @Published var conversationGame: Conversation = initialGameConversation
+    @Published var conversationReg: Conversation = initialRegConversation
     
+    
+    @Published var gameMode: Bool = false
+    
+    @Published var currentLevel: String = "pre-start"
+    {
+        didSet {
+            if currentLevel == "use the key to open the front door" {
+                gameEnds()
+            }
+        }
+    }
+    
+    func exitGame() {
+        gameMode = false
+        conversationGame = initialGameConversation
+        sendRegMessage("You exited the game", .system)
+        currentLevel = "pre-start"
+    }
+    
+    private func gameEnds() {
+        DispatchQueue.main.asyncAfter(deadline:.now() + 1.5){
+            self.currentLevel = "pre-start"
+            self.conversationGame = initialGameConversation
+            self.sendRegMessage("You finished the game", .system)
+            self.gameMode = false
+        }
+    }
+    
+    //MARK: - ---
     
     var fillColor: Color {
         return Color(uiColor: UIColor.systemBackground)
@@ -88,6 +118,7 @@ class ChatViewModel: ObservableObject {
         if role == .userPrompt {
             if let level = levels[currentLevel], message == level.correctOption { // User selected correct prompt, level up
                 currentLevel = level.correctOption // Update level
+                allowInput = false //don't allow input until follow-up messages finish
                 if let newLevel = levels[currentLevel] {
                     
                     // Add Host's description message
@@ -103,8 +134,11 @@ class ChatViewModel: ObservableObject {
                     let systemMessage = Message(id: UUID().uuidString, role: .system, content: "John has made their selection", createdAt: Date())
                     appendWithCumulativeRandomDelay(systemMessage)
                     
+                    DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay){
+                        self.allowInput = true
+                    }
                 }
-            } else if let level = levels[currentLevel] { //User selected wrong prompt
+            } else if levels[currentLevel] != nil { //User selected wrong prompt
                 
                 let aiMessage = Message(id: UUID().uuidString, role: .host, content: "Oops.. you two selected different option. Please discuss and come to an agreement to move on.", createdAt: Date())
                 let matchMessage = Message(id: UUID().uuidString, role: .match, content: "lol I'm not changing my option tho.", createdAt: Date())
