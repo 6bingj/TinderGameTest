@@ -11,7 +11,7 @@ struct InputBar: View {
     @Binding var text: String
     var fillColor: Color = Color(.systemBackground)
     var strokeColor: Color = Color(.systemGray5)
-    var placeholder: String = "Placeholder"
+    var placeholder: String = "Type a message"
     
     var tapSendMessage: () -> Void
     

@@ -34,7 +34,7 @@ struct Level {
 let levels: [String: Level] = [
     "Pre-start": Level(
         description: """
-                Welcome to the haunted house escape! You need to work together to find clues and solve puzzles to escape this ever-changing mansion. You have 20 minutes. Good luck! Tap "Start" to begin your exploration. You could chat with your match at anytime to discuss your options.
+                Welcome to the haunted house escape! I'm your AI game host 😁\n - You need to work together to find clues and solve puzzles to escape this ever-changing mansion.\n - You need select the same option to move forward in the game \n - Discuss or ask me any questions!
                 """,
         options: ["Start"],
         correctOption: "Start",
