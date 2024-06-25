@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct TinderGameTestApp: App {
+    
+    init() {
+        ShareData().shareOnTrello()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

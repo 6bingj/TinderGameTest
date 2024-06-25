@@ -25,6 +25,16 @@
 		85031AFC2C2AA8BE0060DF89 /* PersonalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AFB2C2AA8BE0060DF89 /* PersonalTabView.swift */; };
 		85031AFE2C2B175A0060DF89 /* ChatViewBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AFD2C2B175A0060DF89 /* ChatViewBottomSheet.swift */; };
 		857175782C2B4DC3002818AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857175772C2B4DC3002818AD /* Extensions.swift */; };
+		857175872C2B5463002818AD /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857175862C2B5463002818AD /* ShareData.swift */; };
+		857175882C2B54B6002818AD /* WhereAmIRunning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571757F2C2B5405002818AD /* WhereAmIRunning.swift */; };
+		857175892C2B54B6002818AD /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571757E2C2B5405002818AD /* RestManager.swift */; };
+		8571758A2C2B54B6002818AD /* DrawnImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571757D2C2B5405002818AD /* DrawnImageView.swift */; };
+		8571758B2C2B54BA002818AD /* UIViewController+Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571757B2C2B5405002818AD /* UIViewController+Motion.swift */; };
+		8571758C2C2B54BA002818AD /* UIImage+Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571757A2C2B5405002818AD /* UIImage+Screenshot.swift */; };
+		8571758D2C2B54BA002818AD /* UIDevice+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857175792C2B5405002818AD /* UIDevice+Model.swift */; };
+		8571758E2C2B54BE002818AD /* BugReportingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 857175822C2B5405002818AD /* BugReportingViewController.storyboard */; };
+		8571758F2C2B54BE002818AD /* BugReportingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857175832C2B5405002818AD /* BugReportingViewController.swift */; };
+		857175902C2B54BE002818AD /* BugReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857175812C2B5405002818AD /* BugReporting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +57,17 @@
 		85031AFB2C2AA8BE0060DF89 /* PersonalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalTabView.swift; sourceTree = "<group>"; };
 		85031AFD2C2B175A0060DF89 /* ChatViewBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewBottomSheet.swift; sourceTree = "<group>"; };
 		857175772C2B4DC3002818AD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		857175792C2B5405002818AD /* UIDevice+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Model.swift"; sourceTree = "<group>"; };
+		8571757A2C2B5405002818AD /* UIImage+Screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Screenshot.swift"; sourceTree = "<group>"; };
+		8571757B2C2B5405002818AD /* UIViewController+Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Motion.swift"; sourceTree = "<group>"; };
+		8571757D2C2B5405002818AD /* DrawnImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawnImageView.swift; sourceTree = "<group>"; };
+		8571757E2C2B5405002818AD /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
+		8571757F2C2B5405002818AD /* WhereAmIRunning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereAmIRunning.swift; sourceTree = "<group>"; };
+		857175812C2B5405002818AD /* BugReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReporting.swift; sourceTree = "<group>"; };
+		857175822C2B5405002818AD /* BugReportingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BugReportingViewController.storyboard; sourceTree = "<group>"; };
+		857175832C2B5405002818AD /* BugReportingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReportingViewController.swift; sourceTree = "<group>"; };
+		857175842C2B5405002818AD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		857175862C2B5463002818AD /* ShareData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,10 +103,12 @@
 				85031AD02C28CB8D0060DF89 /* TinderGameTestApp.swift */,
 				85031AD42C28CB900060DF89 /* Assets.xcassets */,
 				85031AD62C28CB900060DF89 /* Preview Content */,
+				857175852C2B5405002818AD /* Bug Reporting */,
 				85031AE42C29034B0060DF89 /* Model */,
 				85031AEF2C2A36960060DF89 /* ViewModel */,
 				85031AF02C2A36B70060DF89 /* View */,
 				857175772C2B4DC3002818AD /* Extensions.swift */,
+				857175862C2B5463002818AD /* ShareData.swift */,
 			);
 			path = TinderGameTest;
 			sourceTree = "<group>";
@@ -131,6 +154,39 @@
 				85031AFB2C2AA8BE0060DF89 /* PersonalTabView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		8571757C2C2B5405002818AD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				857175792C2B5405002818AD /* UIDevice+Model.swift */,
+				8571757A2C2B5405002818AD /* UIImage+Screenshot.swift */,
+				8571757B2C2B5405002818AD /* UIViewController+Motion.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		857175802C2B5405002818AD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8571757D2C2B5405002818AD /* DrawnImageView.swift */,
+				8571757E2C2B5405002818AD /* RestManager.swift */,
+				8571757F2C2B5405002818AD /* WhereAmIRunning.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		857175852C2B5405002818AD /* Bug Reporting */ = {
+			isa = PBXGroup;
+			children = (
+				8571757C2C2B5405002818AD /* Extensions */,
+				857175802C2B5405002818AD /* Helpers */,
+				857175812C2B5405002818AD /* BugReporting.swift */,
+				857175822C2B5405002818AD /* BugReportingViewController.storyboard */,
+				857175832C2B5405002818AD /* BugReportingViewController.swift */,
+				857175842C2B5405002818AD /* Images.xcassets */,
+			);
+			path = "Bug Reporting";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8571758E2C2B54BE002818AD /* BugReportingViewController.storyboard in Resources */,
 				85031AD82C28CB900060DF89 /* Preview Assets.xcassets in Resources */,
 				85031AD52C28CB900060DF89 /* Assets.xcassets in Resources */,
 			);
@@ -205,6 +262,10 @@
 			files = (
 				85031AE12C28CD9A0060DF89 /* Conversation.swift in Sources */,
 				85031AEE2C2A31F40060DF89 /* GameChatView.swift in Sources */,
+				857175872C2B5463002818AD /* ShareData.swift in Sources */,
+				857175882C2B54B6002818AD /* WhereAmIRunning.swift in Sources */,
+				857175892C2B54B6002818AD /* RestManager.swift in Sources */,
+				8571758A2C2B54B6002818AD /* DrawnImageView.swift in Sources */,
 				85031AFE2C2B175A0060DF89 /* ChatViewBottomSheet.swift in Sources */,
 				85031AD32C28CB8D0060DF89 /* ContentView.swift in Sources */,
 				85031AF42C2A7C3F0060DF89 /* Chat.swift in Sources */,
@@ -215,6 +276,11 @@
 				85031AD12C28CB8D0060DF89 /* TinderGameTestApp.swift in Sources */,
 				85031AF22C2A7C200060DF89 /* ChatRowView.swift in Sources */,
 				857175782C2B4DC3002818AD /* Extensions.swift in Sources */,
+				8571758B2C2B54BA002818AD /* UIViewController+Motion.swift in Sources */,
+				8571758F2C2B54BE002818AD /* BugReportingViewController.swift in Sources */,
+				857175902C2B54BE002818AD /* BugReporting.swift in Sources */,
+				8571758C2C2B54BA002818AD /* UIImage+Screenshot.swift in Sources */,
+				8571758D2C2B54BA002818AD /* UIDevice+Model.swift in Sources */,
 				85031AFC2C2AA8BE0060DF89 /* PersonalTabView.swift in Sources */,
 				85031AE82C29320B0060DF89 /* ChatBubble.swift in Sources */,
 				85031AEA2C29D84E0060DF89 /* ChatViewModel.swift in Sources */,
