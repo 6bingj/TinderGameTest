@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChatView: View {
     @StateObject private var viewModel = ChatViewModel()
+    @State private var focus: Bool = false
     
     var body: some View {
         
@@ -55,7 +56,7 @@ struct ChatView: View {
             
             HStack(alignment:.center) {
                 gameButton
-                InputBar(text: $viewModel.inputText, tapSendMessage: viewModel.tapSendMessage)
+                InputBar(text: $viewModel.inputText, isFocused: $focus, tapSendMessage: viewModel.tapSendMessage)
             }
             
             if viewModel.showBottomSheet {
@@ -67,6 +68,7 @@ struct ChatView: View {
             }
         }
         .toolbar(.hidden, for: .navigationBar)
+
         
         
     }
@@ -86,6 +88,7 @@ struct ChatView: View {
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     viewModel.showBottomSheet.toggle()
+                    focus = false //dismiss keyboard whenever the button is tapped
                 }
             } label: {
                 Image(systemName: viewModel.showBottomSheet ? "xmark" : "gamecontroller")

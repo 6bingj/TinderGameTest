@@ -9,6 +9,8 @@ import SwiftUI
 
 struct InputBar: View {
     @Binding var text: String
+    @Binding var isFocused: Bool // External control
+    @FocusState private var localIsFocused: Bool // Internal state to manage focus
     var fillColor: Color = Color(.systemBackground)
     var strokeColor: Color = Color(.systemGray5)
     var placeholder: String = "Type a message"
@@ -18,6 +20,13 @@ struct InputBar: View {
     var body: some View {
         ZStack(alignment: .trailing) {
             TextEditor(text: $text)
+                .focused($localIsFocused)
+                .onChange(of: localIsFocused) { _, newValue in
+                    isFocused = newValue // Sync to external binding
+                }
+                .onChange(of: isFocused) { _, newValue in
+                    localIsFocused = newValue // Sync from external binding
+                }
                 .padding(.vertical, -8)
                 .padding(.horizontal, -4)
                 .frame(minHeight: 22, maxHeight: 300)
@@ -58,7 +67,7 @@ struct InputBar: View {
     }
 }
 
-
-#Preview {
-    InputBar(text: .constant(""), tapSendMessage: {})
-}
+//
+//#Preview {
+//    InputBar(text: .constant(""), tapSendMessage: {})
+//}

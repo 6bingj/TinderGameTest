@@ -24,6 +24,7 @@
 		85031AFA2C2AA5720060DF89 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AF92C2AA5720060DF89 /* ChatListView.swift */; };
 		85031AFC2C2AA8BE0060DF89 /* PersonalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AFB2C2AA8BE0060DF89 /* PersonalTabView.swift */; };
 		85031AFE2C2B175A0060DF89 /* ChatViewBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AFD2C2B175A0060DF89 /* ChatViewBottomSheet.swift */; };
+		857175782C2B4DC3002818AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857175772C2B4DC3002818AD /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		85031AF92C2AA5720060DF89 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		85031AFB2C2AA8BE0060DF89 /* PersonalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalTabView.swift; sourceTree = "<group>"; };
 		85031AFD2C2B175A0060DF89 /* ChatViewBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewBottomSheet.swift; sourceTree = "<group>"; };
+		857175772C2B4DC3002818AD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				85031AE42C29034B0060DF89 /* Model */,
 				85031AEF2C2A36960060DF89 /* ViewModel */,
 				85031AF02C2A36B70060DF89 /* View */,
+				857175772C2B4DC3002818AD /* Extensions.swift */,
 			);
 			path = TinderGameTest;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				85031ADF2C28CD3D0060DF89 /* ChatView.swift in Sources */,
 				85031AD12C28CB8D0060DF89 /* TinderGameTestApp.swift in Sources */,
 				85031AF22C2A7C200060DF89 /* ChatRowView.swift in Sources */,
+				857175782C2B4DC3002818AD /* Extensions.swift in Sources */,
 				85031AFC2C2AA8BE0060DF89 /* PersonalTabView.swift in Sources */,
 				85031AE82C29320B0060DF89 /* ChatBubble.swift in Sources */,
 				85031AEA2C29D84E0060DF89 /* ChatViewModel.swift in Sources */,
