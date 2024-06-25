@@ -30,17 +30,24 @@ struct ChatListView: View {
                     .frame(height: 60)
             }
             
-            List {
-                Text("Messages")
-                    .font(.headline)
-                    .padding(.vertical,5)
-                    .padding(.horizontal,3)
-                NavigationLink(destination: ChatView()) {
-                    ChatRowView(chat: realChat)
+            ZStack(alignment:.bottom) {
+                List {
+                    Text("Messages")
+                        .font(.headline)
+                        .padding(.vertical,5)
+                        .padding(.horizontal,3)
+                    NavigationLink(destination: ChatView()) {
+                        ChatRowView(chat: realChat)
+                    }
+                    
                 }
+                .listStyle(.plain)
                 
+                Text("Prototype for the AI ice breaker feature\nCreated by Bing\nJun 25, 2024")
+                    .multilineTextAlignment(.center)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
             }
-            .listStyle(.plain)
         }
     }
 }
