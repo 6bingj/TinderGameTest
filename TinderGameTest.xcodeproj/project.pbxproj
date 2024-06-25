@@ -21,6 +21,8 @@
 		85031AF42C2A7C3F0060DF89 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AF32C2A7C3F0060DF89 /* Chat.swift */; };
 		85031AF62C2A860F0060DF89 /* ChatToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AF52C2A860F0060DF89 /* ChatToolbar.swift */; };
 		85031AF82C2A9BDA0060DF89 /* InputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AF72C2A9BDA0060DF89 /* InputBar.swift */; };
+		85031AFA2C2AA5720060DF89 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AF92C2AA5720060DF89 /* ChatListView.swift */; };
+		85031AFC2C2AA8BE0060DF89 /* PersonalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AFB2C2AA8BE0060DF89 /* PersonalTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		85031AF32C2A7C3F0060DF89 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		85031AF52C2A860F0060DF89 /* ChatToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatToolbar.swift; sourceTree = "<group>"; };
 		85031AF72C2A9BDA0060DF89 /* InputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputBar.swift; sourceTree = "<group>"; };
+		85031AF92C2AA5720060DF89 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		85031AFB2C2AA8BE0060DF89 /* PersonalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,11 +116,13 @@
 			children = (
 				85031AD22C28CB8D0060DF89 /* ContentView.swift */,
 				85031ADE2C28CD3D0060DF89 /* ChatView.swift */,
+				85031AF92C2AA5720060DF89 /* ChatListView.swift */,
 				85031AED2C2A31F40060DF89 /* GameChatView.swift */,
 				85031AE72C29320B0060DF89 /* ChatBubble.swift */,
 				85031AF12C2A7C200060DF89 /* ChatRowView.swift */,
 				85031AF52C2A860F0060DF89 /* ChatToolbar.swift */,
 				85031AF72C2A9BDA0060DF89 /* InputBar.swift */,
+				85031AFB2C2AA8BE0060DF89 /* PersonalTabView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -201,8 +207,10 @@
 				85031ADF2C28CD3D0060DF89 /* ChatView.swift in Sources */,
 				85031AD12C28CB8D0060DF89 /* TinderGameTestApp.swift in Sources */,
 				85031AF22C2A7C200060DF89 /* ChatRowView.swift in Sources */,
+				85031AFC2C2AA8BE0060DF89 /* PersonalTabView.swift in Sources */,
 				85031AE82C29320B0060DF89 /* ChatBubble.swift in Sources */,
 				85031AEA2C29D84E0060DF89 /* ChatViewModel.swift in Sources */,
+				85031AFA2C2AA5720060DF89 /* ChatListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
