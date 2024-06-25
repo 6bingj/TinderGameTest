@@ -33,6 +33,8 @@ struct ChatView: View {
                             insertion: .move(edge: .top).combined(with: .opacity),
                             removal: .move(edge: .top).combined(with: .opacity)
                         ))
+                        .preferredColorScheme(.light)
+
                 }
                 
                 HStack(alignment:.center) {

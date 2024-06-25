@@ -123,17 +123,32 @@ struct ChatBubble: View {
                 
                 
             case .userPrompt:
-                Spacer(minLength: 24)
-                Text(message.content)
-                    .foregroundColor(.black)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                Spacer(minLength: 24)
-
+                VStack{
+                    HStack{
+                        Spacer(minLength: 30)
+                        Rectangle()
+                            .frame(height: 1)
+                        Text("Mutual Decision")
+                            .font(.subheadline)
+                            .padding(.horizontal, 16)
+                            .lineLimit(1)
+                            .layoutPriority(1)
+                            .minimumScaleFactor(0.7)
+                        Rectangle()
+                            .frame(height: 1)
+                        Spacer(minLength: 30)
+                    }
+                    Text(message.content)
+                        .font(.subheadline)
+                        .bold()
+                }
+                .padding(.vertical, 10)
+                   
             case .system:
                 Spacer(minLength: 24)
                 Text(message.content)
-                    .foregroundColor(.black)
+                    .foregroundColor(.secondary)
+                    .font(.subheadline)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
                 Spacer(minLength: 24)
@@ -153,12 +168,18 @@ struct ChatBubble_Previews: PreviewProvider {
             Message(id: "2", role: .user, content: "I need help.", createdAt: Date(timeIntervalSinceReferenceDate: 100)),
             Message(id: "3", role: .match, content: "Aw what's the matter?", createdAt: Date(timeIntervalSinceReferenceDate: 200)),
             Message(id: "4", role: .host, content: "I didn't understand that. Please try again.", createdAt: Date(timeIntervalSinceReferenceDate: 300)),
-            Message(id: "5", role: .userPrompt, content: "Open the right door", createdAt: Date(timeIntervalSinceReferenceDate: 400))
+            Message(id: "5", role: .userPrompt, content: "Open the right door", createdAt: Date(timeIntervalSinceReferenceDate: 400)),
+            Message(id: "6", role: .system, content: "Open the right door", createdAt: Date(timeIntervalSinceReferenceDate: 400))
+
         ]
     )
 
     static var previews: some View {
-        ChatView()
+        VStack{
+            ForEach(previewConversation.messages) { message in
+                ChatBubble(message: message)
+            }
+        }
     }
 }
 

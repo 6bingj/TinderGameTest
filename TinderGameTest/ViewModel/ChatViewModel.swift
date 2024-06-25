@@ -24,10 +24,10 @@ class ChatViewModel: ObservableObject {
     
     @Published var gameMode: Bool = false
     
-    @Published var currentLevel: String = "pre-start"
+    @Published var currentLevel: String = "Pre-start"
     {
         didSet {
-            if currentLevel == "use the key to open the front door" {
+            if currentLevel == "Use the key to open the front door" {
                 gameEnds()
             }
         }
@@ -36,15 +36,15 @@ class ChatViewModel: ObservableObject {
     func exitGame() {
         gameMode = false
         conversationGame = initialGameConversation
-        sendRegMessage("You exited the game", .system)
-        currentLevel = "pre-start"
+        gameEndingMessages(action: .exit)
+        currentLevel = "Pre-start"
     }
     
     private func gameEnds() {
         DispatchQueue.main.asyncAfter(deadline:.now() + 1.5){
-            self.currentLevel = "pre-start"
+            self.currentLevel = "Pre-start"
             self.conversationGame = initialGameConversation
-            self.sendRegMessage("You finished the game", .system)
+            self.gameEndingMessages(action: .end)
             self.gameMode = false
         }
     }
@@ -91,32 +91,63 @@ class ChatViewModel: ObservableObject {
         }
     }
     
+    //MARK: - Send Messages
     func sendRegMessage(_ message: String, _ role: MessageRole) {
         let newMessage = Message(id: UUID().uuidString, role: role, content: message, createdAt: Date())
         conversationReg.messages.append(newMessage)//append immediately
-        let matchMessage = Message(id: UUID().uuidString, role: .match, content: "followUp", createdAt: Date())
+        
+        let matchResponse = cannedResponses.randomElement() ?? "Haha, that's interesting!"
+        let matchMessage = Message(id: UUID().uuidString, role: .match, content: matchResponse, createdAt: Date())
+        let letsGameMessage = Message(id: UUID().uuidString, role: .match, content: "But let's play the game now please?", createdAt: Date())
+
+        let randomDelay = Double.random(in: 0.7...1.1)
+        let randomDelay2 = Double.random(in: 0.7...1.1)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + randomDelay) {
+            self.conversationReg.messages.append(matchMessage)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + randomDelay + randomDelay2) {
+            self.conversationReg.messages.append(letsGameMessage)
+        }
+    }
+    
+    enum GameEndingAction {
+        case end
+        case exit
+    }
+
+    func gameEndingMessages(action: GameEndingAction) {
+        let (actionMessage, followUpMessage): (String, String) = {
+            switch action {
+            case .end:
+                return ("Congratulations! You've successfully escaped the haunted mansion.", "That was so much fun! I'm glad we played it together. 😊")
+            case .exit:
+                return ("You've exited the Haunted House Escape game.", "Aww, looks like we had to leave the game early. But it was still fun! 😅")
+            }
+        }()
+        
+        let newMessage = Message(id: UUID().uuidString, role: .system, content: actionMessage, createdAt: Date())
+        conversationReg.messages.append(newMessage)
+        
+        let matchMessage = Message(id: UUID().uuidString, role: .match, content: followUpMessage, createdAt: Date())
         
         let randomDelay = Double.random(in: 0.7...1.1)
         DispatchQueue.main.asyncAfter(deadline: .now() + randomDelay) {
             self.conversationReg.messages.append(matchMessage)
         }
-
     }
+
     
     func sendGameMessage(_ message: String, _ role: MessageRole) {
         let newMessage = Message(id: UUID().uuidString, role: role, content: message, createdAt: Date())
         var cumulativeDelay: Double = 0
         
-        if role == .user || role == .userPrompt {
-            //immediately append user message
-            conversationGame.messages.append(newMessage)//append immediately
-        } else {
-            appendWithCumulativeRandomDelay(newMessage)
-        }
-        
         // Follow up to the initial message
         if role == .userPrompt {
             if let level = levels[currentLevel], message == level.correctOption { // User selected correct prompt, level up
+                conversationGame.messages.append(newMessage)//append prompt immediately
+                
                 currentLevel = level.correctOption // Update level
                 allowInput = false //don't allow input until follow-up messages finish
                 if let newLevel = levels[currentLevel] {
@@ -131,20 +162,23 @@ class ChatViewModel: ObservableObject {
                         appendWithCumulativeRandomDelay(matchMessage)
                     }
                     
-                    let systemMessage = Message(id: UUID().uuidString, role: .system, content: "John has made their selection", createdAt: Date())
-                    appendWithCumulativeRandomDelay(systemMessage)
+                    let systemMessage = Message(id: UUID().uuidString, role: .system, content: "Ryan has made their selection", createdAt: Date())
                     
+                    if currentLevel != "Use the key to open the front door" {
+                        appendWithCumulativeRandomDelay(systemMessage)
+                    }
                     DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay){
                         self.allowInput = true
                     }
                 }
             } else if levels[currentLevel] != nil { //User selected wrong prompt
+                //Don't append message
                 allowInput = false //don't allow input until follow-up messages finish
 
-                let aiMessage = Message(id: UUID().uuidString, role: .host, content: "Oops.. you two selected different option. Please discuss and come to an agreement to move on.", createdAt: Date())
+                let aiMessage = Message(id: UUID().uuidString, role: .host, content: "Oops.. you two selected different options. Discuss and select the same option to move on.", createdAt: Date())
                 let matchMessage = Message(id: UUID().uuidString, role: .match, content: "lol I'm not changing my option tho.", createdAt: Date())
 
-                appendWithCumulativeRandomDelay(aiMessage)
+                conversationGame.messages.append(aiMessage) //immediate feedback
                 appendWithCumulativeRandomDelay(matchMessage)
                 
                 
@@ -157,7 +191,8 @@ class ChatViewModel: ObservableObject {
                 appendWithCumulativeRandomDelay(errorMessage)
             }
         } else if role == .user { // user is chatting with the match
-            let matchResponse = "Thanks for your input. Let's see what happens next."
+            conversationGame.messages.append(newMessage)//append message immediately
+            let matchResponse = cannedResponses.randomElement() ?? "Haha, that's interesting!"
             let matchMessage = Message(id: UUID().uuidString, role: .match, content: matchResponse, createdAt: Date())
             appendWithCumulativeRandomDelay(matchMessage)
         }
@@ -168,6 +203,16 @@ class ChatViewModel: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + cumulativeDelay) {
                 self.conversationGame.messages.append(content)
             }
+        }
+    }
+    
+    func gameChatInitFollowUp() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            let matchMessage = Message(id: UUID().uuidString, role: .match, content: "OOOOKay let's do this", createdAt: Date())
+            let systemMessage = Message(id: UUID().uuidString, role: .system, content: "Ryan has made their selection", createdAt: Date())
+            self.conversationGame.messages.append(matchMessage)
+            self.conversationGame.messages.append(systemMessage)
+
         }
     }
 

@@ -11,23 +11,29 @@ struct GameChatView: View {
     @ObservedObject var viewModel: ChatViewModel
     
     var body: some View {
-        ScrollViewReader { scrollViewProxy in
-            ScrollView {
-                VStack(alignment: .leading) {
-                    ForEach(viewModel.conversationExposed.messages) { message in
-                        ChatBubble(message: message)
+        VStack{
+            ScrollViewReader { scrollViewProxy in
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        ForEach(viewModel.conversationExposed.messages) { message in
+                            ChatBubble(message: message)
+                        }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
+                }
+                .animation(.default, value: viewModel.conversationExposed.messages)
+                .onChange(of: viewModel.conversationExposed.messages) {
+                    viewModel.scrollToLastMessage(with: scrollViewProxy)
+                }
+                .onAppear {
+                    viewModel.gameChatInitFollowUp()
                 }
             }
-            .animation(.default, value: viewModel.conversationExposed.messages)
-            .onChange(of: viewModel.conversationExposed.messages) {
-                viewModel.scrollToLastMessage(with: scrollViewProxy)
-            }
+            
+            optionButtons
+            
         }
-        
-        optionButtons
-        
+        .preferredColorScheme(.dark)
     }
     
     @ViewBuilder var optionButtons: some View {
@@ -43,9 +49,10 @@ struct GameChatView: View {
                     }
                     .padding(.horizontal, 16)
                     .padding(.vertical, 5)
-                    .background(Color.white)
-                    .overlay(
+//                    .background(Color.white)
+                    .background(
                         RoundedRectangle(cornerRadius: 40)
+                            .fill(Color(.systemGray5))
                             .stroke(Color(red: 241 / 255, green: 116 / 255, blue: 189 / 255), lineWidth: 2)
                 )
                     .padding(.horizontal, 30)
@@ -54,6 +61,7 @@ struct GameChatView: View {
                         // Additional UI elements for correct option
                     }
                 }
+                .tint(Color(red: 241 / 255, green: 116 / 255, blue: 189 / 255))
                 .disabled(!viewModel.allowInput)
             }
         }
