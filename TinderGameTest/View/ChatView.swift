@@ -52,7 +52,7 @@ struct ChatView: View {
             }
             
             if viewModel.showBottomSheet {
-                bottomSheet
+                ChatViewBottomSheet(viewModel: viewModel)
                     .transition(.asymmetric(
                         insertion: .move(edge: .bottom).combined(with: .opacity),
                         removal: .move(edge: .bottom).combined(with: .opacity)
@@ -70,10 +70,9 @@ struct ChatView: View {
                 viewModel.exitGameAlert.toggle()
             } label: {
                 Image(systemName: "door.right.hand.open")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
+                    .font(.title2)
             }
+            .tint(.primary)
             .padding()
             
         } else {
@@ -82,10 +81,8 @@ struct ChatView: View {
                     viewModel.showBottomSheet.toggle()
                 }
             } label: {
-                Image(systemName: "gamecontroller")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
+                Image(systemName: viewModel.showBottomSheet ? "xmark" : "gamecontroller")
+                    .font(.title2)
             }
             .padding()
         }
@@ -111,48 +108,11 @@ struct ChatView: View {
         
     }
     
-    @ViewBuilder private var bottomSheet: some View {
-        ScrollView {
-            Text("Break the Ice with the AI Game Master")
-            
-            Button {
-                viewModel.showBottomSheet.toggle()
-                withAnimation{
-                    viewModel.gameMode.toggle()
-                }
-                
-            } label: {
-                VStack(alignment: .leading) {
-                    Text("Haunted House Escape")
-                        .font(.title2)
-                    Text("A special storyline generated just for you. Ask any questions to the AI host, and escape together!")
-                        .font(.subheadline)
-                        .multilineTextAlignment(.leading)
-                }
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 25.0)
-                        .fill(.gray)
-                )
-                .padding()
-            }
-            .tint(.white)
-            
-        }
-        .background()
-        .frame(maxHeight: 300)
-    }
-    
 }
 
 
 
 
-struct GameView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        NavigationStack {
-            ChatView()
-        }
-    }
+#Preview {
+    ChatView()
 }
