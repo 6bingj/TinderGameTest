@@ -8,6 +8,7 @@
 import SwiftUI
 
 class ChatViewModel: ObservableObject {
+    var chat =  Chat(name: "Pablo", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, isYourTurn: true)
     @Published var inputText: String = ""
     @Published var showBottomSheet: Bool = false
     @Published var exitGameAlert: Bool = false

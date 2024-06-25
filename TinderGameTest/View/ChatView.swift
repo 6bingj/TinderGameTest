@@ -11,47 +11,57 @@ struct ChatView: View {
     @StateObject private var viewModel = ChatViewModel()
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                if viewModel.gameMode {
-                    GameChatView(viewModel: viewModel)
-                        .transition(.asymmetric(
-                            insertion: .move(edge: .bottom).combined(with: .opacity),
-                            removal: .move(edge: .bottom).combined(with: .opacity)
-                        ))
-                        .alert("Exit the game?", isPresented: $viewModel.exitGameAlert) {
-                            Button("Exit") {
-                                withAnimation {
-                                    viewModel.exitGame()
-                                }
+        
+        VStack {
+            
+            ChatToolbar()
+                .padding(.horizontal)
+                .padding(.bottom, 4)
+                .background()
+                .shadow(color: .secondary.opacity(0.3) ,radius: 10, y: 1)
+            
+            
+            if viewModel.gameMode {
+                GameChatView(viewModel: viewModel)
+                    .transition(.asymmetric(
+                        insertion: .move(edge: .bottom).combined(with: .opacity),
+                        removal: .move(edge: .bottom).combined(with: .opacity)
+                    ))
+                    .alert("Exit the game?", isPresented: $viewModel.exitGameAlert) {
+                        Button("Exit") {
+                            withAnimation {
+                                viewModel.exitGame()
                             }
-                            Button("Cancel", role: .cancel, action: {})
                         }
-                } else {
-                    regChatView
-                        .transition(.asymmetric(
-                            insertion: .move(edge: .top).combined(with: .opacity),
-                            removal: .move(edge: .top).combined(with: .opacity)
-                        ))
-                        .preferredColorScheme(.light)
-
-                }
+                        Button("Cancel", role: .cancel, action: {})
+                    }
+            } else {
                 
-                HStack(alignment:.center) {
-                    gameButton
-                    inputBar($viewModel.inputText, fillColor: viewModel.fillColor, strokeColor: viewModel.strokeColor, tapSendMessage: viewModel.tapSendMessage)
-                }
                 
-                if viewModel.showBottomSheet {
-                    bottomSheet
-                        .transition(.asymmetric(
-                            insertion: .move(edge: .bottom).combined(with: .opacity),
-                            removal: .move(edge: .bottom).combined(with: .opacity)
-                        ))
-                }
+                regChatView
+                    .transition(.asymmetric(
+                        insertion: .move(edge: .top).combined(with: .opacity),
+                        removal: .move(edge: .top).combined(with: .opacity)
+                    ))
+                    .preferredColorScheme(.light)
             }
             
+            HStack(alignment:.center) {
+                gameButton
+                inputBar($viewModel.inputText, fillColor: viewModel.fillColor, strokeColor: viewModel.strokeColor, tapSendMessage: viewModel.tapSendMessage)
+            }
+            
+            if viewModel.showBottomSheet {
+                bottomSheet
+                    .transition(.asymmetric(
+                        insertion: .move(edge: .bottom).combined(with: .opacity),
+                        removal: .move(edge: .bottom).combined(with: .opacity)
+                    ))
+            }
         }
+        .toolbar(.hidden, for: .navigationBar)
+        
+        
     }
     
     @ViewBuilder private var gameButton: some View {
@@ -141,6 +151,8 @@ struct ChatView: View {
 struct GameView_Previews: PreviewProvider {
     
     static var previews: some View {
-        ChatView()
+        NavigationStack {
+            ChatView()
+        }
     }
 }

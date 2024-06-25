@@ -109,9 +109,15 @@ struct ChatBubble: View {
                         ThreeRoundedCornersShape(corners: [.topLeft, .topRight, .bottomLeft], radius: 16)
                     )
             case .match:
-                Circle()
-                    .frame(width: 40)
-                    .foregroundStyle(.yellow)
+                Image("profile1")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle()
+                            .stroke(Color.gray, lineWidth: 1)
+                )
               Text(message.content)
                   .padding(.horizontal, 16)
                   .padding(.vertical, 12)

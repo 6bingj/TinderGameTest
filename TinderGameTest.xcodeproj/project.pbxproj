@@ -17,6 +17,9 @@
 		85031AE82C29320B0060DF89 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE72C29320B0060DF89 /* ChatBubble.swift */; };
 		85031AEA2C29D84E0060DF89 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AE92C29D84E0060DF89 /* ChatViewModel.swift */; };
 		85031AEE2C2A31F40060DF89 /* GameChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AED2C2A31F40060DF89 /* GameChatView.swift */; };
+		85031AF22C2A7C200060DF89 /* ChatRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AF12C2A7C200060DF89 /* ChatRowView.swift */; };
+		85031AF42C2A7C3F0060DF89 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AF32C2A7C3F0060DF89 /* Chat.swift */; };
+		85031AF62C2A860F0060DF89 /* ChatToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AF52C2A860F0060DF89 /* ChatToolbar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		85031AE72C29320B0060DF89 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 		85031AE92C29D84E0060DF89 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		85031AED2C2A31F40060DF89 /* GameChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChatView.swift; sourceTree = "<group>"; };
+		85031AF12C2A7C200060DF89 /* ChatRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRowView.swift; sourceTree = "<group>"; };
+		85031AF32C2A7C3F0060DF89 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		85031AF52C2A860F0060DF89 /* ChatToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatToolbar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,7 @@
 			children = (
 				85031AE22C28DB740060DF89 /* ScriptedResponse.swift */,
 				85031AE02C28CD9A0060DF89 /* Conversation.swift */,
+				85031AF32C2A7C3F0060DF89 /* Chat.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -105,6 +112,8 @@
 				85031ADE2C28CD3D0060DF89 /* ChatView.swift */,
 				85031AED2C2A31F40060DF89 /* GameChatView.swift */,
 				85031AE72C29320B0060DF89 /* ChatBubble.swift */,
+				85031AF12C2A7C200060DF89 /* ChatRowView.swift */,
+				85031AF52C2A860F0060DF89 /* ChatToolbar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,9 +191,12 @@
 				85031AE12C28CD9A0060DF89 /* Conversation.swift in Sources */,
 				85031AEE2C2A31F40060DF89 /* GameChatView.swift in Sources */,
 				85031AD32C28CB8D0060DF89 /* ContentView.swift in Sources */,
+				85031AF42C2A7C3F0060DF89 /* Chat.swift in Sources */,
 				85031AE32C28DB740060DF89 /* ScriptedResponse.swift in Sources */,
+				85031AF62C2A860F0060DF89 /* ChatToolbar.swift in Sources */,
 				85031ADF2C28CD3D0060DF89 /* ChatView.swift in Sources */,
 				85031AD12C28CB8D0060DF89 /* TinderGameTestApp.swift in Sources */,
+				85031AF22C2A7C200060DF89 /* ChatRowView.swift in Sources */,
 				85031AE82C29320B0060DF89 /* ChatBubble.swift in Sources */,
 				85031AEA2C29D84E0060DF89 /* ChatViewModel.swift in Sources */,
 			);
