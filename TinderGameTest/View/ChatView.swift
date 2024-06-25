@@ -13,8 +13,14 @@ struct ChatView: View {
     var body: some View {
         
         VStack {
-            
-            ChatToolbar()
+            VStack {
+                ChatToolbar()
+                if viewModel.gameMode {
+                    Text("Game in Progress")
+                        .font(.footnote)
+                        .fontWeight(.light)
+                }
+            }
                 .padding(.horizontal)
                 .padding(.bottom, 4)
                 .background()
@@ -23,6 +29,7 @@ struct ChatView: View {
             
             if viewModel.gameMode {
                 GameChatView(viewModel: viewModel)
+                    .preferredColorScheme(.dark)
                     .transition(.asymmetric(
                         insertion: .move(edge: .bottom).combined(with: .opacity),
                         removal: .move(edge: .bottom).combined(with: .opacity)
@@ -43,7 +50,7 @@ struct ChatView: View {
                         insertion: .move(edge: .top).combined(with: .opacity),
                         removal: .move(edge: .top).combined(with: .opacity)
                     ))
-                    .preferredColorScheme(.light)
+//                    .preferredColorScheme(.light)
             }
             
             HStack(alignment:.center) {
@@ -72,7 +79,7 @@ struct ChatView: View {
                 Image(systemName: "door.right.hand.open")
                     .font(.title2)
             }
-            .tint(.primary)
+            .tint(Color("TinderRed"))
             .padding()
             
         } else {

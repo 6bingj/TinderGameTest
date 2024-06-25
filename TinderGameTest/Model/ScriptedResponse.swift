@@ -20,7 +20,7 @@ var initialRegConversation = Conversation(
         Message(id: "1", role: .user, content:"Hey, how's it going?", createdAt: Date()),
         Message(id: "2", role: .match, content:"Hey hey! Pretty good, thanks. Your profile said you are an adventurer... prove to me?😛", createdAt: Date()),
         Message(id: "3", role: .user, content:"lol I will let you judge it. Have you heard about the new mini games on Tinder?", createdAt: Date()),
-        Message(id: "4", role: .match, content:"Yeah! Show me what you got 😁", createdAt: Date()),
+        Message(id: "4", role: .match, content:"Yeah! Show me what you got 😁 The game button is on the lower left.", createdAt: Date()),
     ]
 )
 

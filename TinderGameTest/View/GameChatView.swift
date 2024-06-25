@@ -33,7 +33,6 @@ struct GameChatView: View {
             optionButtons
             
         }
-        .preferredColorScheme(.dark)
     }
     
     @ViewBuilder var optionButtons: some View {

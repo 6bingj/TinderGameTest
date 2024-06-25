@@ -38,11 +38,11 @@ struct ChatRowView: View {
                         Text("Game Invite")
                             .font(.footnote)
                             .bold()
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(.systemBackground))
                             .padding(8)
                             .background(
                                 Capsule(style: .continuous)
-                                    .fill(.black)
+                                    .fill(.primary)
                             )
                             .cornerRadius(8)
                     }

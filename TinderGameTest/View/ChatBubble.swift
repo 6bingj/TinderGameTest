@@ -42,8 +42,13 @@ struct ChatBubble: View {
         HStack(alignment:.bottom) {
             switch message.role {
             case .host:
-                Circle()
-                    .frame(width: 40)
+                Image("TinderFlame")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
+                    .padding(5)
+//                    .clipShape(Circle())
+                    
                 Text(message.content)
                     .foregroundColor(userForegroundColor)
                     .padding(.horizontal, 16)

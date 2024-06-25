@@ -10,7 +10,7 @@ import SwiftUI
 struct ChatListView: View {
     var body: some View {
         
-        let realChat =  Chat(name: "Ryan", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, gameInvite: true)
+        let realChat =  Chat(name: "Ryan", lastMessage: "Recently active, chat now!", imageName: "profile1", isVerified: true, gameInvite: true)
         
         VStack {
             ZStack {
