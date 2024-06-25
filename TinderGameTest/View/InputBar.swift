@@ -38,6 +38,7 @@ struct InputBar: View {
                     Text(placeholder)
                         .foregroundColor(.gray)
                         .padding(.leading, 20)
+                        .allowsHitTesting(false)
                 }
                 Spacer()
                 Button(action: {
