@@ -13,5 +13,5 @@ struct Chat: Identifiable {
     let lastMessage: String
     let imageName: String
     let isVerified: Bool
-    let isYourTurn: Bool
+    let gameInvite: Bool
 }

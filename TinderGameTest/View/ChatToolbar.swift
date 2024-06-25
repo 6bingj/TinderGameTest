@@ -11,7 +11,7 @@ struct ChatToolbar: View {
     
     @Environment(\.dismiss) private var dismiss
 
-    var chat: Chat = Chat(name: "Ryan", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, isYourTurn: true)
+    var chat: Chat = Chat(name: "Ryan", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, gameInvite: true)
     
     var body: some View {
         
@@ -55,5 +55,5 @@ struct ChatToolbar: View {
 }
 
 #Preview {
-    ChatToolbar(chat: Chat(name: "Ryan", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, isYourTurn: true))
+    ChatToolbar(chat: Chat(name: "Ryan", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, gameInvite: true))
 }

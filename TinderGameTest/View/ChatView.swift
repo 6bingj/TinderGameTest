@@ -48,7 +48,7 @@ struct ChatView: View {
             
             HStack(alignment:.center) {
                 gameButton
-                inputBar($viewModel.inputText, fillColor: viewModel.fillColor, strokeColor: viewModel.strokeColor, tapSendMessage: viewModel.tapSendMessage)
+                InputBar(text: $viewModel.inputText, tapSendMessage: viewModel.tapSendMessage)
             }
             
             if viewModel.showBottomSheet {

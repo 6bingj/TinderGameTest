@@ -8,7 +8,7 @@
 import SwiftUI
 
 class ChatViewModel: ObservableObject {
-    var chat =  Chat(name: "Pablo", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, isYourTurn: true)
+    var chat =  Chat(name: "Pablo", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, gameInvite: true)
     @Published var inputText: String = ""
     @Published var showBottomSheet: Bool = false
     @Published var exitGameAlert: Bool = false
@@ -52,13 +52,13 @@ class ChatViewModel: ObservableObject {
     
     //MARK: - ---
     
-    var fillColor: Color {
-        return Color(uiColor: UIColor.systemBackground)
-    }
-
-    var strokeColor: Color {
-        return Color(uiColor: UIColor.systemGray5)
-    }
+//    var fillColor: Color {
+//        return Color(uiColor: UIColor.systemBackground)
+//    }
+//
+//    var strokeColor: Color {
+//        return Color(uiColor: UIColor.systemGray5)
+//    }
 
     func handleOptionSelection(_ option: String) {
             sendGameMessage(option, .userPrompt)

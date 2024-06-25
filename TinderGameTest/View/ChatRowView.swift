@@ -34,9 +34,10 @@ struct ChatRowView: View {
                     
                     Spacer()
                     
-                    if chat.isYourTurn {
-                        Text("Your Turn")
+                    if chat.gameInvite {
+                        Text("Game Invite")
                             .font(.footnote)
+                            .bold()
                             .foregroundColor(.white)
                             .padding(8)
                             .background(
@@ -62,5 +63,5 @@ struct ChatRowView: View {
 
 
 #Preview {
-    ChatRowView(chat: Chat(name: "Pablo", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, isYourTurn: true))
+    ChatRowView(chat: Chat(name: "Pablo", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, gameInvite: true))
 }

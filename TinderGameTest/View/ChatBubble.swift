@@ -7,52 +7,6 @@
 
 import SwiftUI
 
-@ViewBuilder func inputBar(_ text: Binding<String>, fillColor: Color, strokeColor: Color, tapSendMessage: @escaping () -> Void) -> some View {
-    HStack {
-        TextEditor(
-            text: text
-        )
-        .padding(.vertical, -8)
-        .padding(.horizontal, -4)
-        .frame(minHeight: 22, maxHeight: 300)
-        .foregroundColor(.primary)
-        .padding(EdgeInsets(top: 12, leading: 16, bottom: 12, trailing: 16))
-        .background(
-            RoundedRectangle(
-                cornerRadius: 16,
-                style: .continuous
-            )
-            .fill(fillColor)
-            .overlay(
-                RoundedRectangle(
-                    cornerRadius: 16,
-                    style: .continuous
-                )
-                .stroke(
-                    strokeColor,
-                    lineWidth: 1
-                )
-            )
-        )
-        .fixedSize(horizontal: false, vertical: true)
-        .padding(.leading)
-
-        Button(action: {
-            withAnimation {
-                tapSendMessage()
-            }
-        }) {
-            Image(systemName: "arrow.up.circle.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
-                .padding(.trailing)
-        }
-        .disabled(text.wrappedValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-    }
-    .padding(.bottom)
-}
-
 struct ThreeRoundedCornersShape: Shape {
     var corners: UIRectCorner
     var radius: CGFloat
@@ -81,6 +35,8 @@ struct ChatBubble: View {
     private var userBackgroundColor: Color {
         return Color(uiColor: .systemBlue)
     }
+    
+    private let minSpacerLength: CGFloat = 38
 
     var body: some View {
         HStack(alignment:.bottom) {
@@ -97,9 +53,9 @@ struct ChatBubble: View {
                         ThreeRoundedCornersShape(corners: [.topLeft, .topRight, .bottomRight], radius: 16)
 
                     )
-                Spacer(minLength: 24)
+                Spacer(minLength: minSpacerLength)
             case .user:
-                Spacer(minLength: 24)
+                Spacer(minLength: minSpacerLength)
                 Text(message.content)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
@@ -125,7 +81,7 @@ struct ChatBubble: View {
                   .clipShape(
                     ThreeRoundedCornersShape(corners: [.topLeft, .topRight, .bottomRight], radius: 16)
                   )
-              Spacer(minLength: 24)
+              Spacer(minLength: minSpacerLength)
                 
                 
             case .userPrompt:

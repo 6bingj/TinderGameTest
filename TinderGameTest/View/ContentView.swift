@@ -18,7 +18,7 @@ struct ContentView: View {
     
     var body: some View {
         
-        let realChat =  Chat(name: "Ryan", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, isYourTurn: false)
+        let realChat =  Chat(name: "Ryan", lastMessage: "Recently active, match now!", imageName: "profile1", isVerified: true, gameInvite: true)
 
         
         NavigationStack {
