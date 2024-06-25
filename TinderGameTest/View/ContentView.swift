@@ -24,7 +24,7 @@ struct ContentView: View {
                     }
                 
             }
-            .tint(Color("TinderPink"))
+            .tint(Color("TinderRed"))
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
         }

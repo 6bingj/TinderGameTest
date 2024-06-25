@@ -117,9 +117,9 @@
 			isa = PBXGroup;
 			children = (
 				85031AD22C28CB8D0060DF89 /* ContentView.swift */,
+				85031AF92C2AA5720060DF89 /* ChatListView.swift */,
 				85031ADE2C28CD3D0060DF89 /* ChatView.swift */,
 				85031AFD2C2B175A0060DF89 /* ChatViewBottomSheet.swift */,
-				85031AF92C2AA5720060DF89 /* ChatListView.swift */,
 				85031AED2C2A31F40060DF89 /* GameChatView.swift */,
 				85031AE72C29320B0060DF89 /* ChatBubble.swift */,
 				85031AF12C2A7C200060DF89 /* ChatRowView.swift */,
