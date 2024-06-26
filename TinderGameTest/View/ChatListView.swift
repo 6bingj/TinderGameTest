@@ -24,10 +24,10 @@ struct ChatListView: View {
                         .padding(10)
                 }
                 
-                Image("TinderLogo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 60)
+//                Image("TinderLogo")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(height: 60)
             }
             
             ZStack(alignment:.bottom) {

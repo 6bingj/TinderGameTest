@@ -95,11 +95,11 @@ struct PersonalTabView: View {
     @ViewBuilder var header: some View {
         VStack {
             HStack {
-                Image("TinderLogo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 60)
-                    .padding(.horizontal)
+//                Image("TinderLogo")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(height: 60)
+//                    .padding(.horizontal)
                 Spacer()
                 
                 Image("Shield")
