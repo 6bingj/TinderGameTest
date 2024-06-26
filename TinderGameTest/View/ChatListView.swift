@@ -10,7 +10,8 @@ import SwiftUI
 struct ChatListView: View {
     var body: some View {
         
-        let realChat =  Chat(name: "Ryan", lastMessage: "Recently active, chat now!", imageName: "profile1", isVerified: true, gameInvite: true)
+        let realChat =  Chat(name: "New Game", lastMessage: "Start a new game!", imageName: "profile1", isVerified: false, gameInvite: true)
+        //TODO: FIX
         
         VStack {
             ZStack {
@@ -32,7 +33,7 @@ struct ChatListView: View {
             
             ZStack(alignment:.bottom) {
                 List {
-                    Text("Messages")
+                    Text("Game List")        //TODO: FIX
                         .font(.headline)
                         .padding(.vertical,5)
                         .padding(.horizontal,3)
@@ -42,11 +43,11 @@ struct ChatListView: View {
                     
                 }
                 .listStyle(.plain)
-                
-                Text("Prototype for the AI ice breaker feature\nCreated by Bing\nJun 25, 2024")
-                    .multilineTextAlignment(.center)
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
+//                
+//                Text("Prototype for the AI ice breaker feature\nCreated by Bing\nJun 25, 2024")
+//                    .multilineTextAlignment(.center)
+//                    .font(.footnote)
+//                    .foregroundColor(.secondary)
             }
         }
     }
