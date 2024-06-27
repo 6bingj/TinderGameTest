@@ -24,7 +24,7 @@
 		85031AFA2C2AA5720060DF89 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AF92C2AA5720060DF89 /* ChatListView.swift */; };
 		85031AFC2C2AA8BE0060DF89 /* PersonalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AFB2C2AA8BE0060DF89 /* PersonalTabView.swift */; };
 		85031AFE2C2B175A0060DF89 /* ChatViewBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85031AFD2C2B175A0060DF89 /* ChatViewBottomSheet.swift */; };
-		8535AE9B2C2CEBE200D6A9AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8535AE9A2C2CEBE200D6A9AE /* GoogleService-Info.plist */; };
+		852F33122C2D112A00A713B7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 852F33112C2D112A00A713B7 /* GoogleService-Info.plist */; };
 		8535AE9E2C2CEC9500D6A9AE /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8535AE9D2C2CEC9500D6A9AE /* FirebaseAnalyticsSwift */; };
 		8535AEA02C2CEC9500D6A9AE /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8535AE9F2C2CEC9500D6A9AE /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		8535AEA22C2CF17300D6A9AE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8535AEA12C2CF17300D6A9AE /* FirebaseAuth */; };
@@ -52,7 +52,7 @@
 		85031AF92C2AA5720060DF89 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		85031AFB2C2AA8BE0060DF89 /* PersonalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalTabView.swift; sourceTree = "<group>"; };
 		85031AFD2C2B175A0060DF89 /* ChatViewBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewBottomSheet.swift; sourceTree = "<group>"; };
-		8535AE9A2C2CEBE200D6A9AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		852F33112C2D112A00A713B7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8535AEA32C2CFB3F00D6A9AE /* FirebaseSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSignIn.swift; sourceTree = "<group>"; };
 		8535AEA52C2CFBF600D6A9AE /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		857175772C2B4DC3002818AD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 				857175772C2B4DC3002818AD /* Extensions.swift */,
 				8535AEA32C2CFB3F00D6A9AE /* FirebaseSignIn.swift */,
 				8535AEA52C2CFBF600D6A9AE /* AuthenticationManager.swift */,
-				8535AE9A2C2CEBE200D6A9AE /* GoogleService-Info.plist */,
+				852F33112C2D112A00A713B7 /* GoogleService-Info.plist */,
 			);
 			path = TinderGameTest;
 			sourceTree = "<group>";
@@ -214,8 +214,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8535AE9B2C2CEBE200D6A9AE /* GoogleService-Info.plist in Resources */,
 				85031AD82C28CB900060DF89 /* Preview Assets.xcassets in Resources */,
+				852F33122C2D112A00A713B7 /* GoogleService-Info.plist in Resources */,
 				85031AD52C28CB900060DF89 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,12 +376,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"TinderGameTest/Preview Content\"";
 				DEVELOPMENT_TEAM = Q9835JB82Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Chat Game";
+				INFOPLIST_KEY_CFBundleDisplayName = "Tinder Next";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -393,7 +393,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.prism32.chatGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prism32.TinderGameTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -407,12 +407,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"TinderGameTest/Preview Content\"";
 				DEVELOPMENT_TEAM = Q9835JB82Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Chat Game";
+				INFOPLIST_KEY_CFBundleDisplayName = "Tinder Next";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -424,7 +424,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.prism32.chatGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prism32.TinderGameTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

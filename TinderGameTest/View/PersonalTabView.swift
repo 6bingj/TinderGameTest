@@ -20,7 +20,7 @@ struct PersonalTabView: View {
         ScrollView {
             Spacer()
             
-            Text("Hi Micky, \n\nThank you for taking the time to review this prototype! With my skill and passion as a designer/developer, I am confident in my ability to contribute meaningfully to your team as a Design Engineer. I would greatly appreciate any feedback you might have—both on the prototype itself and my suitability as a candidate.\n\nBest,\nBing\nBingjianliu11@gmail.com")
+            Text("Hi Micky, \n\nThank you for taking the time to review this prototype! With my skill and passion as a designer/developer, I am confident in my ability to contribute meaningfully to your team as a Design Engineer. \n\nI would greatly appreciate any feedback you might have—both on the prototype itself and my suitability as a candidate.\n\nBest,\nBing\nBingjianliu11@gmail.com")
                 .padding(20)
                 .frame(maxWidth: .infinity)
                 .background(
@@ -95,11 +95,11 @@ struct PersonalTabView: View {
     @ViewBuilder var header: some View {
         VStack {
             HStack {
-//                Image("TinderLogo")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(height: 60)
-//                    .padding(.horizontal)
+                Image("TinderLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 60)
+                    .padding(.horizontal)
                 Spacer()
                 
                 Image("Shield")

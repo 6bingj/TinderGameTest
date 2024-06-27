@@ -18,12 +18,7 @@ struct ContentView: View {
                         Image(systemName: "message.fill")
                     }
                 
-//                PersonalTabView()
-//                    .tabItem {
-//                        Image(systemName: "person.fill")
-//                    }
-                
-                Text("Thank you for testing this game! Please contact bingjianliu11@gmail.com if you encounter any issues.")
+                PersonalTabView()
                     .tabItem {
                         Image(systemName: "person.fill")
                     }
