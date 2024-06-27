@@ -6,17 +6,26 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct TinderGameTestApp: App {
     
-//    init() {
-//        ShareData().shareOnTrello()
-//    }
-//    
+    init() {
+        FirebaseApp.configure()
+        print("Configured Firebase")
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .task {
+                    do {
+                        try await signInAnonymous()
+                    } catch {
+                        print(error)
+                    }
+                }
         }
     }
 }
